@@ -78,26 +78,27 @@ function validateForm() {
   <p><i>Please complete the form. Mandatory fields are marked with a </i><em>*</em></p>
   <fieldset>
     <legend>Contact Details</legend>
-      <label for="name">Name <em>*</em></label>
-      <input id="name" placeholder="e.g. Jane Smith" autofocus required><br>
+      <label for="name">First Name <em>*</em></label>
+      <input id="firstname" name="firstname" placeholder="e.g. Jane" autofocus required><br>
+      <label for="name">Last Name <em>*</em></label>
+      <input id="lastname" name="lastname" placeholder="e.g. Smith" autofocus required><br>
       <label for="id">ID<em>*</em></label>
-      <input id="id" type="number" min="1" max="10000000" step="1" placeholder="e.g. 123456" ><br>
+      <input id="id" name="id" type="number" min="1" max="10000000" step="1" placeholder="e.g. 123456" ><br>
       <label for="email">Email <em>*</em></label>
-      <input id="email" type="email" placeholder="e.g. qwer@qwer.com" required><br>
+      <input id="email" name="email" type="email" placeholder="e.g. qwer@qwer.com" required><br>
       <label for="password">Password <em>*</em></label>
-      <input id="password" type="password" required><br>
-  </fieldset>
+      <input id="password" name="password" type="password" required><br>
   </fieldset>
   <fieldset>
     <legend>Personal Information</legend>
 
       <label for="birthDate">Birth Date</label>
-      <input id="birthDate" type="date" ><br>
+      <input id="birthDate" name="birthDate" type="date" ><br>
 
       <label for="age">Age</label>
-      <input id="age" type="number" min="1" max="120" step="1" ><br>
+      <input id="age" name="age" type="number" min="1" max="120" step="1" ><br>
       <label for="gender">Gender</label>
-      <select id="gender">
+      <select id="gender" name="gender">
         <option value="female">Female</option>
         <option value="male">Male</option>
       </select><br>
