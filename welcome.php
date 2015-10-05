@@ -72,7 +72,7 @@
     <nav>
         <h2 class = "subtitle">Contents</h2>
         <ul>
-            <li><a href= "index.html">My Profile</a></li><br>
+            <li><a href= "myprofile.html">My Profile</a></li><br>
             <li><a href= "index.html">Book/Cancel a Room</a></li><br>
             <li><a href= "index.html">Provide a Feedback</a></li><br>
             <li><a href= "index.html">Feedback History</a></li><br>
