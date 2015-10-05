@@ -15,6 +15,9 @@
 <body>
 
 	<?php
+        // Start the session
+        session_start();
+        
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 		// Check connection
 		if(!$conn) {
@@ -31,11 +34,12 @@
 		$count=mysqli_num_rows($result);
 		// If result matched $email, table row must be 1 row
 		if($count==1){
+            // Set session variables
+            $_SESSION['row'] = $row;
 			$row = mysqli_fetch_assoc($result);
-			if ($password == $row['password']){
-				$firstname = $row['firstname'];
-				$lastname = $row['lastname'];
-				echo "Login Successful";
+			if ($password == $_SESSION['row']['password']){
+				$firstname = $_SESSION['row']['firstname'];
+				$lastname = $_SESSION['row']['lastname'];
 			}
 			else {
 				header("Location: index.html");
@@ -54,16 +58,17 @@
 ?>
 
 
-    <p class = "role">Logged in as: Admin/Manager/User</p><br>
+    <?php
+        echo '<p class = "role">Successful logged in as: ';
+        echo $_SESSION['row']['rank'];
+        echo '</p><br>';
+        echo '<header class = "Disclaimer"><h1>Welcome</h1>';
+        echo $_SESSION['row']['firstname'];
+        echo " ";
+        echo $_SESSION['row']['lastname'];
+        echo '</header>';
+        ?>
 
-	<?php
-		echo '<header class = "Disclaimer"><h1>Welcome</h1>';
-		echo $firstname;
-		echo " ";
-		echo $lastname;
-		echo '</header>';
-	?>
-	
 
 
 
@@ -72,7 +77,7 @@
     <nav>
         <h2 class = "subtitle">Contents</h2>
         <ul>
-            <li><a href= "myprofile.html">My Profile</a></li><br>
+            <li><a href= "myprofile.php">My Profile</a></li><br>
             <li><a href= "index.html">Book/Cancel a Room</a></li><br>
             <li><a href= "index.html">Provide a Feedback</a></li><br>
             <li><a href= "index.html">Feedback History</a></li><br>
