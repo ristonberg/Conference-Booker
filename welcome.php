@@ -15,9 +15,6 @@
 <body>
 
 	<?php
-        // Start the session
-        session_start();
-        
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 		// Check connection
 		if(!$conn) {
@@ -27,6 +24,7 @@
 		$email = $_POST['email']; 
 		$password = $_POST['password'];
 		$tablename = 'users';
+		$needrank = 'admin';
 
 		$sql="SELECT * FROM $tablename WHERE email='$email'";
 		$result=mysqli_query($conn, $sql);
@@ -34,41 +32,32 @@
 		$count=mysqli_num_rows($result);
 		// If result matched $email, table row must be 1 row
 		if($count==1){
-            // Set session variables
-            $_SESSION['row'] = $row;
-			$row = mysqli_fetch_assoc($result);
+			$_SESSION['row'] = mysqli_fetch_assoc($result);
 			if ($password == $_SESSION['row']['password']){
 				$firstname = $_SESSION['row']['firstname'];
 				$lastname = $_SESSION['row']['lastname'];
 			}
 			else {
 				header("Location: index.html");
-				echo '<script type="text/javascript">';
-				echo 'alert("Invalid Email or Password")';
-				echo '</script>';
 				exit();
 			}
 		}
 		else{
 			header("Location: index.html");
-			echo '<script language="javascript">alert("Invalid Email or Password")</script>';
 			exit();
 		}
-
-?>
-
-
-    <?php
-        echo '<p class = "role">Successful logged in as: ';
-        echo $_SESSION['row']['rank'];
-        echo '</p><br>';
-        echo '<header class = "Disclaimer"><h1>Welcome</h1>';
-        echo $_SESSION['row']['firstname'];
-        echo " ";
-        echo $_SESSION['row']['lastname'];
-        echo '</header>';
-        ?>
-
+		
+		echo '<p class = "role">Logged in as: ';
+		echo $_SESSION['row']['rank'];
+		echo '</p>';
+		echo '<br>';
+		echo '<header class = "Disclaimer"><h1>Welcome<br>';
+		echo $firstname;
+		echo " ";
+		echo $lastname;
+		echo '</h1></header>';
+	?>
+	
 
 
 
@@ -77,7 +66,7 @@
     <nav>
         <h2 class = "subtitle">Contents</h2>
         <ul>
-            <li><a href= "myprofile.php">My Profile</a></li><br>
+            <li><a href= "index.html">My Profile</a></li><br>
             <li><a href= "index.html">Book/Cancel a Room</a></li><br>
             <li><a href= "index.html">Provide a Feedback</a></li><br>
             <li><a href= "index.html">Feedback History</a></li><br>
@@ -85,11 +74,17 @@
             <li><a href= "index.html">Something Else</a></li><br>
             
         </ul>
-        <h3 class = "subtitle">Something More moremore Else</h2>
-            <ul>
-                <li><a href= "">dsusafas</a></li><br>
-                <li><a href= "index.html">afhjkbs</a></li><br>
-            </ul>
+		<?php
+			if($_SESSION['row']['rank'] == "Admin"):
+				echo '<h3 class = "subtitle">ADMIN</h3>';
+				echo '<ul>';
+					echo '<li><a href= "AssignUserForm.html">Add New User</a></li><br>';
+					echo '<li><a href= "index.html">fdh</a></li><br>';
+				echo '</ul>';
+			else:
+				echo '<p>HI</p>';
+			endif;
+		?>
             </nav>
 </aside>
 
