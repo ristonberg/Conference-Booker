@@ -64,8 +64,6 @@
 <option value="male">Male</option>
 </select><br>
 
-</fieldset>
-
 <p><input type="submit" value="Save Changes"></p>
 
 
@@ -82,6 +80,8 @@
 
 <p>Copyright © 2015</p>
 </footer>
+
+</form>
 
 </main>
 </body>
