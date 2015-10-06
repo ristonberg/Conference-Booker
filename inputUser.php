@@ -15,8 +15,8 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "INSERT INTO Users (firstname, lastname, id, email, password, birthdate, age, gender)
-VALUES ($firstname, $lastname, $id, $email, $password, $birthDate, $age, $gender)";
+$sql = "INSERT INTO users (firstname, lastname, id, email, password, birthdate, age, gender)
+VALUES ('$firstname', '$lastname', '$id', '$email', '$password', '$birthDate', '$age', '$gender')";
 
 if (mysqli_query($conn, $sql)) {
     echo "New record created successfully";
