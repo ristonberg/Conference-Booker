@@ -7,7 +7,7 @@
 <title>Conference Room Booker</title>
 	
 <body style="background-color:#b0c4de">
-
+<script type="text/javascript" src="logOut.js"></script>
 <link rel="stylesheet" href="welcome.css">
 
 </head>
@@ -52,6 +52,8 @@
 		
 		echo '<p class = "role">Logged in as: ';
 		echo $_SESSION['row']['rank'];
+        echo '&nbsp';
+        echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
 		echo '</p>';
 		echo '<br>';
 		echo '<header class = "Disclaimer"><h1>Welcome<br>';
