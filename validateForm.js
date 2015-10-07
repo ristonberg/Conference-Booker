@@ -20,3 +20,14 @@ function validateForm() {
     return true;
   }
 }
+
+
+function validateComments(input) {
+    if (input.value.length < 50) {
+        input.setCustomValidity("You need to comment in more detail.");
+    }
+    else {
+        // There's no error. Clear any error message.
+        input.setCustomValidity("");
+    }
+}
