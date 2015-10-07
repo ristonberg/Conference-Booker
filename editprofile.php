@@ -55,7 +55,7 @@
 <main class="Content">
 <h2>Edit My profile</h2>
 
-<form id="assignUserForm" action="inputUser.php" method="POST" onsubmit="true">
+<form id="assignUserForm" action="updateUser.php" method="POST" onsubmit="true">
 
 <h4>Personal Information</h4>
 

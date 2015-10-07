@@ -15,6 +15,9 @@
 <body>
 
 	<?php
+        // Start the session
+        session_start();
+        
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 		// Check connection
 		if(!$conn) {
@@ -78,7 +81,7 @@
 			if($_SESSION['row']['rank'] == "Admin"):
 				echo '<h3 class = "subtitle">ADMIN</h3>';
 				echo '<ul>';
-					echo '<li><a href= "AssignUserForm.html">Add New User</a></li><br>';
+					echo '<li><a href= "assignUserForm.html">Add New User</a></li><br>';
 					echo '<li><a href= "index.html">fdh</a></li><br>';
 				echo '</ul>';
 			else:
