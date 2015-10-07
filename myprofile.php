@@ -39,11 +39,17 @@
             <li><a href= "index.html">Something Else</a></li><br>
             
         </ul>
-        <h3 class = "subtitle">Something More moremore Else</h2>
-            <ul>
-                <li><a href= "">dsusafas</a></li><br>
-                <li><a href= "index.html">afhjkbs</a></li><br>
-            </ul>
+		<?php
+			if($_SESSION['row']['rank'] == "Admin"):
+				echo '<h3 class = "subtitle">ADMIN</h3>';
+				echo '<ul>';
+					echo '<li><a href= "AssignUserForm.html">Add New User</a></li><br>';
+					echo '<li><a href= "index.html">Update User Rank</a></li><br>';
+				echo '</ul>';
+			else:
+				echo '<p>HI</p>';
+			endif;
+		?>
             </nav>
 </aside>
 
