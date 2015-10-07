@@ -53,6 +53,12 @@
 
 <h4>Personal Information</h4>
 
+<?php
+echo '<label for="email">Email </label>';
+echo '<input id="email" name="email" type="email" value="';
+echo $_SESSION['row']['email'];
+echo '"readonly><br>';
+?>
 <label for="birthDate">Birth Date</label>
 <input id="birthDate" name="birthDate" type="date" ><br>
 
