@@ -32,7 +32,7 @@
 <h2 class = "subtitle">Contents</h2>
 <ul>
 <li><a href= "myprofile.php">My Profile</a></li><br>
-<li><a href= "bookRoom.php">Book/Cancel a Room</a></li><br>
+<li><a href= "index.html">Book/Cancel a Room</a></li><br>
 <li><a href= "index.html">Provide a Feedback</a></li><br>
 <li><a href= "index.html">Feedback History</a></li><br>
 <li><a href= "index.html">Appointment History</a></li><br>
@@ -47,24 +47,47 @@
 </nav>
 </aside>
 <main class="Content">
-<h2>Edit My profile</h2>
+<h3>Delete an Appointment</h2>
 
-<form id="assignUserForm" action="inputUser.php" method="POST" onsubmit="true">
 
-<h4>Personal Information</h4>
+<h4>You don't have any appointment right now.</h4>
 
-<label for="birthDate">Birth Date</label>
-<input id="birthDate" name="birthDate" type="date" ><br>
+<br>
 
-<label for="age">Age</label>
-<input id="age" name="age" type="number" min="1" max="120" step="1" ><br>
-<label for="gender">Gender</label>
-<select id="gender" name="gender">
-<option value="female">Female</option>
-<option value="male">Male</option>
+
+
+<form id="assignUserForm" action="searchRoom.php" method="POST" onsubmit="true">
+
+<h3>Create New Appointment</h3>
+<h4>Search a Room</h4>
+
+<label for="Internet">Internet</label>
+<select id="Internet" name="Internet">
+<option value="1">Yes</option>
+<option value="0">No</option>
+
+<label for="Projector">Projector</label>
+<select id="Projector" name="Projector">
+<option value="1">Yes</option>
+<option value="0">No</option>
+
+<label for="Screen">Screen</label>
+<select id="Screen" name="Screen">
+<option value="1">Yes</option>
+<option value="0">No</option>
+
+<label for="Size">Size</label>
+<select id="Size" name="Size">
+<option value="10">10</option>
+<option value="20">20</option>
+<option value="40">40</option>
+<option value="80">80</option>
+
+
+
 </select><br>
 
-<p><input type="submit" value="Save Changes"></p>
+<p><input type="submit" value="Search"></p>
 
 
 
