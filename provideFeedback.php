@@ -46,8 +46,8 @@ textarea:required:invalid, input:required:invalid {
 <h2 class = "subtitle">Contents</h2>
 <ul>
 <li><a href= "myprofile.php">My Profile</a></li><br>
-<li><a href= "index.html">Book/Cancel a Room</a></li><br>
-<li><a href= "index.html">Provide a Feedback</a></li><br>
+<li><a href= "bookRoom.php">Book/Cancel a Room</a></li><br>
+<li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
 <li><a href= "index.html">Feedback History</a></li><br>
 <li><a href= "index.html">Appointment History</a></li><br>
 <li><a href= "index.html">Something Else</a></li><br>
@@ -61,18 +61,11 @@ textarea:required:invalid, input:required:invalid {
 </nav>
 </aside>
 <main class="Content">
-<h3>Delete an Appointment</h2>
-
-
-<h4>You don't have any appointment right now.</h4>
-
-<br>
-
 
 
 <form id="feedback" action="#" onsubmit="return validateForm()">
 
-<h3>Create New a Feedback </h3>
+<h3>Create a New Feedback </h3>
 <label for="id">Room ID: </label>
  <input id="id" name="id" type="number" min="1" max="10000000" step="1" placeholder="e.g. 123456" required><br><br>
      

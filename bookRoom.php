@@ -32,8 +32,8 @@
 <h2 class = "subtitle">Contents</h2>
 <ul>
 <li><a href= "myprofile.php">My Profile</a></li><br>
-<li><a href= "index.html">Book/Cancel a Room</a></li><br>
-<li><a href= "index.html">Provide a Feedback</a></li><br>
+<li><a href= "bookRoom.php">Book/Cancel a Room</a></li><br>
+<li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
 <li><a href= "index.html">Feedback History</a></li><br>
 <li><a href= "index.html">Appointment History</a></li><br>
 <li><a href= "index.html">Something Else</a></li><br>
@@ -59,33 +59,38 @@
 <form id="assignUserForm" action="searchRoom.php" method="POST" onsubmit="true">
 
 <h3>Create New Appointment</h3>
-<h4>Search a Room</h4>
+<h4>Search avaiable Room</h4>
 
 <label for="Internet">Internet</label>
 <select id="Internet" name="Internet">
 <option value="1">Yes</option>
 <option value="0">No</option>
-
+</select>
+<br><br>
 <label for="Mic">Mic</label>
 <select id="Mic" name="Mic">
 <option value="1">Yes</option>
 <option value="0">No</option>
-
+</select>
+<br><br>
 <label for="Writingboard">Writingboard</label>
 <select id="Writingboard" name="Writingboard">
 <option value="1">Yes</option>
 <option value="0">No</option>
-
+</select>
+<br><br>
 <label for="Screen">Screen</label>
 <select id="Screen" name="Screen">
 <option value="1">Yes</option>
 <option value="0">No</option>
-
+</select>
+<br><br>
 <label for="Computer">Computer</label>
 <select id="Computer" name="Computer">
 <option value="1">Yes</option>
 <option value="0">No</option>
-
+</select>
+<br><br>
 <label for="Size">Size</label>
 <select id="Size" name="Size">
 <option value="10">10</option>
