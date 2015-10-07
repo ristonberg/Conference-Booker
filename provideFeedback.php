@@ -56,43 +56,19 @@
 
 
 
-<form id="assignUserForm" action="searchRoom.php" method="POST" onsubmit="true">
+<form id="feedback" action="#" onsubmit="return validateForm()">
 
-<h3>Create New Appointment</h3>
-<h4>Search a Room</h4>
+<h3>Create New a Feedback</h3>
+<label for="id">Room ID</label>
+<input id="id" name="password" type="password" required><br>
 
-<label for="Internet">Internet</label>
-<select id="Internet" name="Internet">
-<option value="1">Yes</option>
-<option value="0">No</option>
-
-<label for="Mic">Mic</label>
-<select id="Mic" name="Mic">
-<option value="1">Yes</option>
-<option value="0">No</option>
-
-<label for="Writingboard">Writingboard</label>
-<select id="Writingboard" name="Writingboard">
-<option value="1">Yes</option>
-<option value="0">No</option>
-
-<label for="Screen">Screen</label>
-<select id="Screen" name="Screen">
-<option value="1">Yes</option>
-<option value="0">No</option>
-
-<label for="Computer">Computer</label>
-<select id="Computer" name="Computer">
-<option value="1">Yes</option>
-<option value="0">No</option>
-
-<label for="Size">Size</label>
-<select id="Size" name="Size">
-<option value="10">10</option>
-<option value="20">20</option>
-<option value="40">40</option>
-<option value="80">80</option>
-
+<select id="gender" name="gender">
+<option value="female">Female</option>
+<option value="male">Male</option>
+</br>
+<input id="id" name="id" type="number" min="1" max="10000000" step="1" placeholder="e.g. 123456" required><br>
+<label for="comments">How do you like your experience<em>*</em></label>
+<textarea id="comments" oninput="validateComments(this)" required></textarea>
 
 
 </select><br>

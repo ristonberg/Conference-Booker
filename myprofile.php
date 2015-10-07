@@ -72,7 +72,7 @@
     
     echo '<h4>Birthday: ';
     echo "&nbsp&nbsp";
-    echo $_SESSION['row']['birthday'];
+    echo $_SESSION['row']['birthdate'];
     echo '</h4>';
     
     echo '<h4>Age: ';
