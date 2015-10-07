@@ -64,17 +64,26 @@ echo '<label for="email">Email </label>';
 echo '<input id="email" name="email" type="email" value="';
 echo $_SESSION['row']['email'];
 echo '"readonly><br>';
-?>
-<label for="birthDate">Birth Date</label>
-<input id="birthDate" name="birthDate" type="date" ><br>
+echo '<label for="birthDate">Birth Date</label>';
+echo '<input id="birthDate" name="birthDate" type="date" value="';
+echo $_SESSION['row']['birthdate'];
+echo '"><br>';
+echo '<label for="age">Age</label>';
+echo '<input id="age" name="age" type="number" min="1" max="120" step="1" value="';
+echo $_SESSION['row']['age'];
+echo '"><br>';
+echo '<label for="gender">Gender</label>';
+echo '<select id="gender" name="gender">';
+    echo '<option value="';
+	echo $_SESSION['row']['gender'];
+	echo '">';
+	echo $_SESSION['row']['gender'];
+	echo '</option>';
+	echo '<option value="Female">Female</option>';
+	echo '<option value="Male">Male</option>';
+echo '</select><br>';
 
-<label for="age">Age</label>
-<input id="age" name="age" type="number" min="1" max="120" step="1" ><br>
-<label for="gender">Gender</label>
-<select id="gender" name="gender">
-<option value="female">Female</option>
-<option value="male">Male</option>
-</select><br>
+?>
 
 <p><input type="submit" value="Save Changes"></p>
 
