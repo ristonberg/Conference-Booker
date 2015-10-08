@@ -4,9 +4,11 @@
 
 <meta charset="utf-8">
 <script type="text/javascript" src="validateForm.js"></script>
+<script type="text/javascript" src="background.js"></script>
+
 <title>Conference Room Booker</title>
 
-<body style="background-color:#b0c4de">
+<body>
 
 <style>
     #comments{
@@ -27,7 +29,16 @@ textarea:required:invalid, input:required:invalid {
 </head>
 
 <body>
+<h2>
+<script Language="JavaScript">
 
+hitme();
+
+document.fgColor = textColor();
+var myMessage= Greetings();
+document.write(myMessage);
+</script>
+</h2>
 
 <?php
     session_start();

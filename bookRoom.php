@@ -6,14 +6,25 @@
 
 <title>Conference Room Booker</title>
 
-<body style="background-color:#b0c4de">
+<body>
 <script type="text/javascript" src="logOut.js"></script>
+<script type="text/javascript" src="background.js"></script>
+
 <link rel="stylesheet" href="welcome.css">
 
 </head>
 
 <body>
+<h2>
+<script Language="JavaScript">
 
+hitme();
+
+document.fgColor = textColor();
+var myMessage= Greetings();
+document.write(myMessage);
+</script>
+</h2>
 
 <?php
     session_start();
