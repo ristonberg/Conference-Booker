@@ -4,11 +4,20 @@
   <meta charset="utf-8">
   <title>Assign User Form</title>
   <link href="assignUserForm.css" rel="stylesheet">
+      <script type="text/javascript" src="logOut.js"></script>
+
+    <script type="text/javascript" src="background.js"></script>
+
 
 <style>
 textarea:required:invalid, input:required:invalid {
   background-color: lightyellow;
 }
+#button1 {
+    width:100px;
+    float: right;
+}
+
 </style>
 
 <script>
@@ -42,7 +51,17 @@ function validateForm() {
 
 </head>
 <body>
-
+    <h2>
+        <script Language="JavaScript">
+            
+            hitme();
+            
+            document.fgColor = textColor();
+            var myMessage= Greetings();
+            document.write(myMessage);
+            </script>
+        <input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>
+    </h2>
 <h1>Assign User Form</h1>
 <form id="assignUserForm" action="inputUser.php" method="POST" onsubmit="return validateForm()">
   <p><i>Please complete the form. Mandatory fields are marked with a </i><em>*</em></p>
