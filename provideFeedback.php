@@ -6,7 +6,7 @@
 <script type="text/javascript" src="validateForm.js"></script>
 <script type="text/javascript" src="background.js"></script>
 
-<title>Conference Room Booker</title>
+<title>Provide Room Feedback</title>
 
 <body>
 
@@ -61,7 +61,7 @@ document.write(myMessage);
 <li><a href= "myprofile.php">My Profile</a></li><br>
 <li><a href= "bookRoom.php">Book/Cancel a Room</a></li><br>
 <li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
-<li><a href= "index.html">Feedback History</a></li><br>
+<li><a href= "provideFeedback.php">Feedback History</a></li><br>
 <li><a href= "index.html">Appointment History</a></li><br>
 <li><a href= "index.html">Something Else</a></li><br>
 
@@ -76,9 +76,10 @@ document.write(myMessage);
 <main class="Content">
 
 
-<form id="feedback" action="#" onsubmit="return validateForm()">
+<form id="feedback" action="submitFeedback.php" onsubmit="return validateForm()">
 
-<h3>Create a New Feedback </h3>
+<h3>Provide New Feedback </h3>
+<input type="hidden" id="userid" name="userid" value="<?=$_SESSION['row']['id'];?>"/>
 <label for="id">Room ID: </label>
  <input id="id" name="id" type="number" min="1" max="10000000" step="1" placeholder="e.g. 123456" required><br><br>
      
