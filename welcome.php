@@ -9,13 +9,25 @@
 <body>
 <script type="text/javascript" src="logOut.js"></script>
 <script type="text/javascript" src="background.js"></script>
-
 <link rel="stylesheet" href="welcome.css">
+<link href='lib/fullcalendar.css' rel='stylesheet' />
+<link href='lib/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script type="text/javascript" src='lib/moment.min.js'></script>
+<script type="text/javascript" src='lib/jquery.min.js'></script>
+<script type="text/javascript" src='lib/fullcalendar.min.js'></script>
 
+<script type="text/javascript" src="calendar.js"></script>
+<style>
+	#calendar {
+		max-width: 900px;
+		/*margin: 0 auto;*/
+	}
+</style>
 </head>
 
 <body>
 <h2>
+
 <script Language="JavaScript">
 
 hitme();
@@ -107,11 +119,9 @@ document.write(myMessage);
 <main class="Content">
     <h2>Account Overall</h2>
     <!--Check if he has Appoinment-->
-    <p> You don't have any appointment now</p>
-    
-    
-    <iframe src="https://www.google.com/calendar/embed?src=xuezhma%40gmail.com&ctz=America/Chicago" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-    
+    <!-- <p> You don't have any appointment now</p> -->
+    <h3>Upcoming Event</h3>
+    <div id='calendar'></div>  
     
     
     <footer class="Disclaimer">

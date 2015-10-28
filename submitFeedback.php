@@ -31,7 +31,7 @@
 			die("Connection failed: " . mysqli_connect_error());
 		}
 		$sql = "INSERT INTO Feedback (roomid, userid, rating, comments)
-			Values  = ('$roomid', '$userid', '$rating', '$comments')";
+			Values ('$roomid', '$userid', '$rating', '$comments')";
 		if (mysqli_query($conn, $sql)) {
 			echo "Feedback successfully submitted<br>";
 			echo '<button onclick="goBack()">Go Back</button>';
