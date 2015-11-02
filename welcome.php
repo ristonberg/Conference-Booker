@@ -15,8 +15,9 @@
 <script type="text/javascript" src='lib/moment.min.js'></script>
 <script type="text/javascript" src='lib/jquery.min.js'></script>
 <script type="text/javascript" src='lib/fullcalendar.min.js'></script>
+<!-- TO DO: re-format date/time to match Calendar.
+	 TO DO: also display events in english on top of calendar  -->
 
-<script type="text/javascript" src="calendar.js"></script>
 <style>
 	#calendar {
 		max-width: 900px;
@@ -40,6 +41,12 @@ document.write(myMessage);
 	<?php
         // Start the session
         session_start();
+
+        // if user has already logged in
+        // skip connecting database
+        if(!$_SESSION['row']){
+
+        
         
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 		// Check connection
@@ -72,7 +79,13 @@ document.write(myMessage);
 			header("Location: index.html");
 			exit();
 		}
-		
+
+		$userID = $_SESSION['row']['id'];
+		$tablenameII = 'Appt';
+		$sqlII="SELECT * FROM $tablenameII WHERE user = '$userID'";
+		$resultII=mysqli_query($conn, $sqlII);
+		}
+
 		echo '<p class = "role">Logged in as: ';
 		echo $_SESSION['row']['rank'];
         echo '&nbsp';
@@ -94,6 +107,7 @@ document.write(myMessage);
     <nav>
         <h2 class = "subtitle">Contents</h2>
         <ul>
+        	<li><a href= "welcome.php">Overall</a></li><br>
             <li><a href= "myprofile.php">My Profile</a></li><br>
             <li><a href= "bookRoom.php">Book/Cancel a Room</a></li><br>
             <li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
@@ -116,6 +130,73 @@ document.write(myMessage);
             </nav>
 </aside>
 
+<script type="text/javascript">
+	//  create data for appointment array, 
+	// 	where each 
+	//  appointment = {
+	// 		date: $row['date'],
+	// 		starttime: $row['starttime'],
+	// 		endtime: $row['endtime'],
+	// 		room: $row['ConfID']
+	// 	}
+
+	var appArray = [];
+	var eachApp = {};
+	<?php $newRow = mysqli_fetch_assoc($resultII) ?>
+	var data = "<?php echo $newRow ?>";
+	while (data){
+		eachApp = {
+			date: "<?$newRow['date']?>",
+			starttime: "<?$newRow['starttime']?>",
+			endtime: "<?$newRow['endtime']?>",
+			room: "<?$newRow['ConfID']?>"
+		};
+		appArray.push(eachApp);
+		var data = "<?php echo $newRow ?>";
+		<?php $newRow = mysqli_fetch_assoc($resultII) ?>
+	}
+
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; 
+	var yyyy = today.getFullYear();
+
+	if(dd<10) {
+	    dd='0'+dd
+	} 
+
+	if(mm<10) {
+	    mm='0'+mm
+	} 
+
+	today = yyyy + "-" + mm + "-" + dd;
+
+	$(document).ready(function() {
+		
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			
+			defaultDate: today,
+			//editable: true,
+			eventLimit: true, 
+			events: [
+				
+				{	
+					//an example
+					title: 'room 101',
+					start: '2015-10-29T15:30:00',
+					end: '2015-10-29T16:00:00'
+				},
+				
+			]
+		});
+		
+	});
+</script>
 <main class="Content">
     <h2>Account Overall</h2>
     <!--Check if he has Appoinment-->
