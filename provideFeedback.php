@@ -58,6 +58,7 @@ document.write(myMessage);
 <nav>
 <h2 class = "subtitle">Contents</h2>
 <ul>
+<li><a href= "welcome.php">Overall</a></li><br>
 <li><a href= "myprofile.php">My Profile</a></li><br>
 <li><a href= "bookRoom.php">Book/Cancel a Room</a></li><br>
 <li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
