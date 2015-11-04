@@ -67,67 +67,12 @@ document.write(myMessage);
 
 <br>
 
-
-
-<form id="assignUserForm" action="searchRoom.php" method="POST" onsubmit="true">
-
-<h3>Create New Appointment</h3>
-<h4>Search avaiable Room</h4>
-
-<label for="Building">Building</label>
-<select id="Building" name="Building">
 <?php
-	include 'Dbconnect.php';
-	$sql="SELECT BuildName FROM Building";
-	foreach ($dbo->query($sql) as $row){
-	echo "<option value=$row[BuildCode]> $row[BuildName]</option>";
-	}
+	foreach($_POST['checkedBoxes'] as $box){
+		$roomID=$box;
+		
+
 ?>
-</select>
-
-<label for="Internet">Internet</label>
-<select id="Internet" name="Internet">
-<option value="1">Yes</option>
-<option value="0">No</option>
-</select>
-<br><br>
-<label for="Mic">Mic</label>
-<select id="Mic" name="Mic">
-<option value="1">Yes</option>
-<option value="0">No</option>
-</select>
-<br><br>
-<label for="Writingboard">Writingboard</label>
-<select id="Writingboard" name="Writingboard">
-<option value="1">Yes</option>
-<option value="0">No</option>
-</select>
-<br><br>
-<label for="Screen">Screen</label>
-<select id="Screen" name="Screen">
-<option value="1">Yes</option>
-<option value="0">No</option>
-</select>
-<br><br>
-<label for="Computer">Computer</label>
-<select id="Computer" name="Computer">
-<option value="1">Yes</option>
-<option value="0">No</option>
-</select>
-<br><br>
-<label for="Size">Size</label>
-<select id="Size" name="Size">
-<option value="10">10</option>
-<option value="20">20</option>
-<option value="40">40</option>
-<option value="80">80</option>
-
-
-
-</select><br>
-
-<p><input type="submit" value="Search"></p>
-
 
 
 
@@ -143,7 +88,6 @@ document.write(myMessage);
 <p>Copyright © 2015</p>
 </footer>
 
-</form>
 
 </main>
 </body>
