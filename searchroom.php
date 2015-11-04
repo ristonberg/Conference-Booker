@@ -94,10 +94,10 @@ document.write(myMessage);
 <br><br>
 <label for="duration">Duration of Meeting(minutes)</label>
 <select id="duration" name="duration">
-<option value="30">30</option>
-<option value="60">60</option>
-<option value="90">90</option>
-<option value="120">120</option>
+<option value="1">30</option>
+<option value="2">60</option>
+<option value="3">90</option>
+<option value="4">120</option>
 </select>
 <br><br>
 <label for="Internet">Internet</label>
@@ -176,6 +176,8 @@ document.write(myMessage);
 			echo "<form action='bookRoom.php' method='post'>";
 			while($row=mysql_fetch_array($result)){
 				echo " <input type='checkbox' value='".$row['RoomID']."' name='checkedBoxes[]'/> ".$row['RoomID'];
+				echo " <input type='hidden' name='start' value='"$starttime"'/> ";
+				echo " <input type='hidden' name='duration' value='"$duration"'/> ";
 				}
 			echo "<input type='submit' value='process'>";
 			echo "</form>";

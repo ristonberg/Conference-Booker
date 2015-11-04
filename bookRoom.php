@@ -68,10 +68,24 @@ document.write(myMessage);
 <br>
 
 <?php
-	foreach($_POST['checkedBoxes'] as $box){
-		$roomID=$box;
-		
+	$starttime=$_POST["starttime"];
+	$duration=$_POST["duration"];
+	$endtime=$starttime;
+	for($x=0; $x<$duration; $x++){
+		$endtime=strtotime("+30 mins", strtotime($endtime));
+	}
+	$endtime=$startime+$duration;
+		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
+	// Check connection
+	if (!$conn) {
+    	die("Connection failed: " . mysqli_connect_error());
+	}
 
+	foreach($_POST["checkedBoxes"] as $box){
+		$roomID=$box;
+		$sql = "INSERT INTO users (firstname, lastname, id, email, password, birthdate, age, gender)
+	VALUES ('$firstname', '$lastname', '$id', '$email', '$password', '$birthDate', '$age', '$gender')";
+	}
 ?>
 
 
