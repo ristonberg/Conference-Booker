@@ -43,13 +43,12 @@ document.write(myMessage);
     <nav>
         <h2 class = "subtitle">Contents</h2>
         <ul>
-            <li><a href= "welcome.php">Overall</a></li><br>
-            <li><a href= "myprofile.php">My Profile</a></li><br>
-            <li><a href= "bookRoom.php">Book/Cancel a Room</a></li><br>
-            <li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
-            <li><a href= "index.html">Feedback History</a></li><br>
-            <li><a href= "index.html">Appointment History</a></li><br>
-            <li><a href= "index.html">Something Else</a></li><br>
+			<li><a href= "welcome.php">Overall</a></li><br>
+			<li><a href= "myprofile.php">My Profile</a></li><br>
+			<li><a href= "searchoom.php">Book/Cancel a Room</a></li><br>
+			<li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
+			<li><a href= "index.html">Feedback History</a></li><br>
+			<li><a href= "index.html">Appointment History</a></li><br>
             
         </ul>
 		<?php
