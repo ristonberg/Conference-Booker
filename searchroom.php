@@ -170,14 +170,14 @@ document.write(myMessage);
 			size >= '$size' AND buildCode = ( SELECT BuildCode FROM Building WHERE BuildName='$Building') 
 			AND C.roomID NOT IN (
 				SELECT roomID FROM Appt WHERE date=$date AND (starttime >= '$starttime' AND 
-				endtime <= ('$startime'+ '$duration')))	";
+				endtime <= ('$startime'+ '$duration')))";
 		
 		if (mysqli_query($conn, $sql)) {
 			echo "<form action='bookRoom.php' method='post'>";
 			while($row=mysql_fetch_array($result)){
 				echo " <input type='checkbox' value='".$row['RoomID']."' name='checkedBoxes[]'/> ".$row['RoomID'];
-				echo " <input type='hidden' name='start' value='"$starttime"'/> ";
-				echo " <input type='hidden' name='duration' value='"$duration"'/> ";
+				echo " <input type='hidden' name='start' value='".$starttime."'/> ";
+				echo " <input type='hidden' name='duration' value='".$duration."'/> ";
 				}
 			echo "<input type='submit' value='process'>";
 			echo "</form>";
@@ -186,6 +186,8 @@ document.write(myMessage);
 			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 		}
 		mysqli_close($conn);
+		}
+		}
 	?>
 
 
