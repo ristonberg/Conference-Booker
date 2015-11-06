@@ -1,7 +1,29 @@
 
+#title{
+    font-family: 'Trade Winds', cursive;
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+#note{
+    color:#FF0066;
+    text-align: center;
+}
+#footer{
+    padding-top: 400px;
+}
+input{
+    color: black;
+}
+
+a:hover {
+    box-shadow: 10px 10px 5px grey;
+}
+
 
 body {
-    //text-align: center;
+    /*text-align: center;*/
   font-size: medium;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   margin: 0px;
