@@ -53,11 +53,6 @@ document.write(myMessage);
 <li><a href= "index.html">Appointment History</a></li><br>
 
 </ul>
-<h3 class = "subtitle">Something More moremore Else</h2>
-<ul>
-<li><a href= "">dsusafas</a></li><br>
-<li><a href= "index.html">afhjkbs</a></li><br>
-</ul>
 </nav>
 </aside>
 <main class="Content">
@@ -77,13 +72,11 @@ document.write(myMessage);
 
 <label for="Building">Building</label>
 <select id="Building" name="Building">
-<?php
-	include 'Dbconnect.php';
-	$sql="SELECT BuildName FROM Building";
-	foreach ($dbo->query($sql) as $row){
-	echo "<option value=$row[BuildCode]> $row[BuildName]</option>";
-	}
-?>
+<option value="MLH">Maclean Hall</option>
+<option value="SC">Seaman's Center</option>
+<option value="MH">Macbride Hall</option>
+<option value="SH">Schaeffer Hall</option>
+<option value="LIB">Main Library</option>
 </select>
 <br><br>
 <label for="date">Date</label>
@@ -167,7 +160,7 @@ document.write(myMessage);
 		}
 		$sql = "SELECT RoomID FROM Conf_rooms C WHERE internet='$internet' AND mic='$mic' AND 
 			writingboard='$writingboard' AND screen='$screen' AND computer='$computer' AND
-			size >= '$size' AND buildCode = ( SELECT BuildCode FROM Building WHERE BuildName='$Building') 
+			size >= '$size' AND buildCode = '$Building' 
 			AND C.roomID NOT IN (
 				SELECT roomID FROM Appt WHERE date=$date AND (starttime >= '$starttime' AND 
 				endtime <= ('$startime'+ '$duration')))";
@@ -178,6 +171,8 @@ document.write(myMessage);
 				echo " <input type='checkbox' value='".$row['RoomID']."' name='checkedBoxes[]'/> ".$row['RoomID'];
 				echo " <input type='hidden' name='start' value='".$starttime."'/> ";
 				echo " <input type='hidden' name='duration' value='".$duration."'/> ";
+				echo " <input type='hidden' name='date' value='".$date."'/> ";
+
 				}
 			echo "<input type='submit' value='process'>";
 			echo "</form>";
