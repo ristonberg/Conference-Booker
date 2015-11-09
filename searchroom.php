@@ -53,6 +53,11 @@ document.write(myMessage);
 <li><a href= "index.html">Appointment History</a></li><br>
 
 </ul>
+<h3 class = "subtitle">Something More moremore Else</h2>
+<ul>
+<li><a href= "">dsusafas</a></li><br>
+<li><a href= "index.html">afhjkbs</a></li><br>
+</ul>
 </nav>
 </aside>
 <main class="Content">
@@ -151,6 +156,10 @@ document.write(myMessage);
 		$computer = $_POST["computer"];
 		$size= $_POST["Size"];
 		
+		$endtime=$starttime;
+		for($x=0; $x<$duration; $x++){
+			$endtime=strtotime("+30 mins", strtotime($endtime));
+		}
 		
 		// Create connection
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
