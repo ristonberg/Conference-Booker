@@ -70,6 +70,7 @@ document.write(myMessage);
 <?php
 	$starttime=$_POST["starttime"];
 	$duration=$_POST["duration"];
+	$date=$_POST["date"];
 	$endtime=$starttime;
 	for($x=0; $x<$duration; $x++){
 		$endtime=strtotime("+30 mins", strtotime($endtime));
@@ -83,8 +84,8 @@ document.write(myMessage);
 
 	foreach($_POST["checkedBoxes"] as $box){
 		$roomID=$box;
-		$sql = "INSERT INTO users (firstname, lastname, id, email, password, birthdate, age, gender)
-	VALUES ('$firstname', '$lastname', '$id', '$email', '$password', '$birthDate', '$age', '$gender')";
+		$sql = "INSERT INTO Appt (ConfID, user, date, starttime, endtime)
+	VALUES ('$roomID', '$userid', '$date', '$starttime', '$endtime')";
 	}
 ?>
 
