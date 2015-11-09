@@ -68,6 +68,8 @@ document.write(myMessage);
 <br>
 
 <?php
+	date_default_timezone_set('America/Chicago');
+
 	$starttime=$_POST["starttime"];
 	$duration=$_POST["duration"];
 	$date=$_POST["date"];
