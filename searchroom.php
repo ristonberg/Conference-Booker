@@ -70,7 +70,7 @@ document.write(myMessage);
 
 
 
-<form id="assignUserForm" action="searchroom.php?go" method="POST" onsubmit="true">
+<form id="assignUserForm" action="searchroom.php" method="POST" onsubmit="true">
 
 <h3>Create New Appointment</h3>
 <h4>Search avaiable Room</h4>
@@ -142,9 +142,9 @@ document.write(myMessage);
 
 
 <?php
-	if(isset($_POST['submit'])){
-	if(isset($_GET['go'])){
-	
+	if($_POST){
+		date_default_timezone_set('America/Chicago');
+
 		$Building = $_POST["Building"];
 		$date = $_POST["date"];
 		$starttime = $_POST["startTime"];
@@ -169,12 +169,12 @@ document.write(myMessage);
 		}
 		$sql = "SELECT RoomID FROM Conf_rooms C WHERE internet='$internet' AND mic='$mic' AND 
 			writingboard='$writingboard' AND screen='$screen' AND computer='$computer' AND
-			size >= '$size' AND buildCode = '$Building' 
+			size >= '$size' AND Building = '$Building' 
 			AND C.roomID NOT IN (
 				SELECT roomID FROM Appt WHERE date=$date AND (starttime >= '$starttime' AND 
-				endtime <= ('$startime'+ '$duration')))";
-		
-		if (mysqli_query($conn, $sql)) {
+				endtime <= '$endtime'))";
+		$result=mysqli_query($conn, $sql);
+		if ($result) {
 			echo "<form action='bookRoom.php' method='post'>";
 			while($row=mysql_fetch_array($result)){
 				echo " <input type='checkbox' value='".$row['RoomID']."' name='checkedBoxes[]'/> ".$row['RoomID'];
@@ -183,7 +183,7 @@ document.write(myMessage);
 				echo " <input type='hidden' name='date' value='".$date."'/> ";
 
 				}
-			echo "<input type='submit' value='process'>";
+			echo "<input type='submit' value='book'>";
 			echo "</form>";
 					
 		} else {
@@ -191,7 +191,7 @@ document.write(myMessage);
 		}
 		mysqli_close($conn);
 		}
-		}
+		
 	?>
 
 
