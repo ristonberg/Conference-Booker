@@ -129,31 +129,35 @@ document.write(myMessage);
             </nav>
 </aside>
 
-<script type="text/javascript">
-	//  create data for appointment array, 
-	// 	where each 
-	//  appointment = {
-	// 		date: $row['date'],
-	// 		starttime: $row['starttime'],
-	// 		endtime: $row['endtime'],
-	// 		room: $row['ConfID']
-	// 	}
+<script>
+// 	//  create data for appointment array, 
+// 	// 	where each 
+// 	//  appointment = {
+// 	// 		date: $row['date'],
+// 	// 		starttime: $row['starttime'],
+// 	// 		endtime: $row['endtime'],
+// 	// 		room: $row['ConfID']
+// 	// 	}
 
-	var appArray = [];
-	var eachApp = {};
-	<?php $newRow = mysqli_fetch_assoc($resultII) ?>
-	var data = "<?php echo $newRow ?>";
-	while (data){
-		eachApp = {
-			date: "<?$newRow['date']?>",
-			starttime: "<?$newRow['starttime']?>",
-			endtime: "<?$newRow['endtime']?>",
-			room: "<?$newRow['ConfID']?>"
-		};
-		appArray.push(eachApp);
-		var data = "<?php echo $newRow ?>";
-		<?php $newRow = mysqli_fetch_assoc($resultII) ?>
-	}
+// 	var appArray = [];
+// 	var eachApp = {};
+// 	<?php $newRow = mysqli_fetch_assoc($resultII) ?>
+// 	var data = "<?php echo $newRow ?>";
+// 	while (data){
+// 		eachApp = {
+// 			date: "<?php echo $newRow['date']?>",
+// 			starttime: "<?php echo $newRow['starttime']?>",
+// 			endtime: "<?php echo $newRow['endtime']?>",
+// 			room: "<?php echo $newRow['ConfID']?>"
+// 		};
+// 		appArray.push(eachApp);
+// 		var data = "<?php echo $newRow ?>";
+// 		<?php $newRow = mysqli_fetch_assoc($resultII) ?>
+// 	}
+
+	
+
+	
 
 	var today = new Date();
 	var dd = today.getDate();
@@ -171,28 +175,34 @@ document.write(myMessage);
 	today = yyyy + "-" + mm + "-" + dd;
 
 	$(document).ready(function() {
-		
-		$('#calendar').fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
-			},
-			
-			defaultDate: today,
-			//editable: true,
-			eventLimit: true, 
-			events: [
-				
-				{	
-					//an example
-					title: 'room 101',
-					start: '2015-10-29T15:30:00',
-					end: '2015-10-29T16:00:00'
+		var xmlhttp = new XMLHttpRequest();
+		var url = "http://176.32.230.252/xuezheng.com/json.php";
+		var $arr;
+		xmlhttp.onreadystatechange=function() {
+		    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		        $arr = JSON.parse(xmlhttp.responseText);
+			$('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
 				},
 				
-			]
-		});
+				defaultDate: today,
+				//editable: true,
+				eventLimit: true, 
+				events: $arr
+			});
+
+		        console.log("yes");
+		        console.log("arr: ", $arr);
+		    }
+
+		}
+		xmlhttp.open("GET", url, true);
+		xmlhttp.send();
+		
+
 		
 	});
 </script>
