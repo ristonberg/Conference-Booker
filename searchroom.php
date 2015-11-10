@@ -149,45 +149,41 @@ document.write(myMessage);
 		$date = $_POST["date"];
 		$starttime = $_POST["startTime"];
 		$duration = $_POST["duration"];
-		$internet = $_POST["internet"];
-		$mic = $_POST["mic"];
-		$writingboard = $_POST["writingboard"];
-		$screen = $_POST["screen"];
-		$computer = $_POST["computer"];
-		$size= $_POST["size"];
+		$internet = $_POST["Internet"];
+		$mic = $_POST["Mic"];
+		$writingboard = $_POST["Writingboard"];
+		$screen = $_POST["Screen"];
+		$computer = $_POST["Computer"];
+		$size= $_POST["Size"];
 		
 		$endtime=$starttime;
 		for($x=0; $x<$duration; $x++){
-			$endtime=strtotime("+30 mins", strtotime($endtime));
+			$endtime=date('H:i', strtotime($endtime)+1800);
 		}
-		
+		echo $starttime;
+		echo $endtime;
+
+
 		// Create connection
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 		// Check connection
 		if (!$conn) {
 			die("Connection failed: " . mysqli_connect_error());
 		}
-		$sql = "SELECT roomID FROM Conf_rooms C WHERE internet='$internet' AND mic='$mic' AND 
-			writingboard='$writingboard' AND screen='$screen' AND computer='$computer' AND
-			size >= '$size' AND Building = '$Building' 
+		$sql = "SELECT roomID FROM Conf_rooms C WHERE internet = '$internet' AND mic = '$mic' AND 
+			writingboard = '$writingboard' AND screen = '$screen' AND computer = '$computer' AND
+			size >= '$size' AND Building = '$Building'
 			AND C.roomID NOT IN (
 				SELECT roomID FROM Appt WHERE date='$date' AND (starttime >= '$starttime' AND 
 				endtime <= '$endtime'))";
 		$result=mysqli_query($conn, $sql);
-		if ($result) {
-			$row=mysql_fetch_array($result)
+		if($result) {
 			echo "<form action='bookRoom.php' method='post'>";
-<<<<<<< Updated upstream
-			while ($row != null){
-				echo " <input type='checkbox' value='".$row['RoomID']."' name='checkedBoxes[]'/> ".$row['RoomID'];
-=======
-			while($row=mysql_fetch_array($result)){
+			while($row=mysqli_fetch_row($result)){
 				echo " <input type='checkbox' value='".$row['roomID']."' name='checkedBoxes[]'/> ".$row['roomID'];
->>>>>>> Stashed changes
 				echo " <input type='hidden' name='start' value='".$starttime."'/> ";
 				echo " <input type='hidden' name='duration' value='".$duration."'/> ";
 				echo " <input type='hidden' name='date' value='".$date."'/> ";
-				$row=mysql_fetch_array($result)
 				}
 			echo "<input type='submit' value='book'>";
 			echo "</form>";
