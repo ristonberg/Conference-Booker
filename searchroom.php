@@ -77,6 +77,17 @@ document.write(myMessage);
 
 <label for="Building">Building</label>
 <select id="Building" name="Building">
+<!--
+<?php
+	echo '<select id="Building" name="Building">'
+	$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
+	$sql = "SELECT * FROM Building";
+	$query=mysqli_query($conn, $sql);
+	while ($row=mysql_fetch_array($query)){
+		echo '<option value='".$row['BuildCode']."'>' .$row['BuildName']. '</option>';
+	}
+?>
+-->
 <option value="MLH">Maclean Hall</option>
 <option value="SC">Seaman's Center</option>
 <option value="MH">Macbride Hall</option>
