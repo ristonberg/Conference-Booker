@@ -1,7 +1,7 @@
 
 
 body {
-    //text-align: center;
+    /*text-align: center;*/
   font-size: medium;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   margin: 0px;
@@ -36,9 +36,8 @@ aside.NavSiderbar{
     padding-top: 0px;
     float:left;
     width:18%;
-    min-height: 100em;
    
-    //font-size: small;
+    /*font-size: small;*/
 }
 
 .subtitle {
