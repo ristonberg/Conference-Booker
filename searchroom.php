@@ -149,12 +149,12 @@ document.write(myMessage);
 		$date = $_POST["date"];
 		$starttime = $_POST["startTime"];
 		$duration = $_POST["duration"];
-		$internet = $_POST["Internet"];
-		$mic = $_POST["Mic"];
-		$writingboard = $_POST["Writingboard"];
-		$screen = $_POST["Screen"];
+		$internet = $_POST["internet"];
+		$mic = $_POST["mic"];
+		$writingboard = $_POST["writingboard"];
+		$screen = $_POST["screen"];
 		$computer = $_POST["computer"];
-		$size= $_POST["Size"];
+		$size= $_POST["size"];
 		
 		$endtime=$starttime;
 		for($x=0; $x<$duration; $x++){
@@ -171,14 +171,19 @@ document.write(myMessage);
 			writingboard='$writingboard' AND screen='$screen' AND computer='$computer' AND
 			size >= '$size' AND Building = '$Building' 
 			AND C.roomID NOT IN (
-				SELECT roomID FROM Appt WHERE date=$date AND (starttime >= '$starttime' AND 
+				SELECT roomID FROM Appt WHERE date='$date' AND (starttime >= '$starttime' AND 
 				endtime <= '$endtime'))";
 		$result=mysqli_query($conn, $sql);
 		if ($result) {
 			$row=mysql_fetch_array($result)
 			echo "<form action='bookRoom.php' method='post'>";
+<<<<<<< Updated upstream
 			while ($row != null){
 				echo " <input type='checkbox' value='".$row['RoomID']."' name='checkedBoxes[]'/> ".$row['RoomID'];
+=======
+			while($row=mysql_fetch_array($result)){
+				echo " <input type='checkbox' value='".$row['roomID']."' name='checkedBoxes[]'/> ".$row['roomID'];
+>>>>>>> Stashed changes
 				echo " <input type='hidden' name='start' value='".$starttime."'/> ";
 				echo " <input type='hidden' name='duration' value='".$duration."'/> ";
 				echo " <input type='hidden' name='date' value='".$date."'/> ";
