@@ -180,8 +180,8 @@ document.write(myMessage);
 		if (!$conn) {
 			die("Connection failed: " . mysqli_connect_error());
 		}
-		$sql = "SELECT roomID FROM Conf_rooms C WHERE internet = '$internet' AND mic = '$mic' AND 
-			writingboard = '$writingboard' AND screen = '$screen' AND computer = '$computer' AND
+		$sql = "SELECT roomID FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
+			writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
 			size >= '$size' AND Building = '$Building'
 			AND C.roomID NOT IN (
 				SELECT roomID FROM Appt WHERE date='$date' AND (starttime >= '$starttime' AND 
