@@ -77,23 +77,22 @@ document.write(myMessage);
 
 <label for="Building">Building</label>
 <select id="Building" name="Building">
-<!--
 <?php
-	echo '<select id="Building" name="Building">'
+	echo '<select id="Building" name="Building">';
 	$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
-	$sql = "SELECT * FROM Building";
+	$sql = "SELECT BuildCode, BuildName FROM Building";
 	$query=mysqli_query($conn, $sql);
-	while ($row=mysql_fetch_array($query)){
-		echo '<option value='".$row['BuildCode']."'>' .$row['BuildName']. '</option>';
+	while ($_SESSION['row']=mysqli_fetch_array($query)){
+		$BuildCode = $_SESSION['row']['BuildCode'];
+		$BuildName = $_SESSION['row']['BuildName'];
+		echo "<option value='";
+		echo $BuildCode;
+		echo "'>";
+		echo $BuildName;
+		echo "</option>";
 	}
+	echo "</select>";
 ?>
--->
-<option value="MLH">Maclean Hall</option>
-<option value="SC">Seaman's Center</option>
-<option value="MH">Macbride Hall</option>
-<option value="SH">Schaeffer Hall</option>
-<option value="LIB">Main Library</option>
-</select>
 <br><br>
 <label for="date">Date</label>
 <input type="date" name="date">
@@ -190,11 +189,23 @@ document.write(myMessage);
 		$result=mysqli_query($conn, $sql);
 		if($result) {
 			echo "<form action='bookRoom.php' method='post'>";
-			while($row=mysqli_fetch_row($result)){
-				echo " <input type='checkbox' value='".$row['roomID']."' name='checkedBoxes[]'/> ".$row['roomID'];
-				echo " <input type='hidden' name='start' value='".$starttime."'/> ";
-				echo " <input type='hidden' name='duration' value='".$duration."'/> ";
-				echo " <input type='hidden' name='date' value='".$date."'/> ";
+			while($row=mysqli_fetch_array($result)){
+				echo " <input type='radio' value='";
+				echo $row['roomID'];
+				echo "' name='checkedboxes[]'/>";
+				echo $Building;
+				echo " ";
+				echo $row['roomID'];
+				echo " <input type='hidden' name='start' value='";
+				echo $starttime;
+				echo "'/>";
+				echo " <input type='hidden' name='endtime' value='";
+				echo $duration;
+				echo "'/> ";
+				echo " <input type='hidden' name='date' value='";
+				echo $date;
+				echo "'/> ";
+				echo "<br>";
 				}
 			echo "<input type='submit' value='book'>";
 			echo "</form>";
