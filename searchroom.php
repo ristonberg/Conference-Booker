@@ -154,7 +154,6 @@ document.write(myMessage);
 <?php
 	if($_POST){
 		date_default_timezone_set('America/Chicago');
-
 		$Building = $_POST["Building"];
 		$date = $_POST["date"];
 		$starttime = $_POST["startTime"];
@@ -170,10 +169,6 @@ document.write(myMessage);
 		for($x=0; $x<$duration; $x++){
 			$endtime=date('H:i', strtotime($endtime)+1800);
 		}
-		echo $starttime;
-		echo $endtime;
-
-
 		// Create connection
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 		// Check connection
@@ -192,7 +187,7 @@ document.write(myMessage);
 			while($row=mysqli_fetch_array($result)){
 				echo " <input type='radio' value='";
 				echo $row['roomID'];
-				echo "' name='checkedboxes[]'/>";
+				echo "' name='room'/>";
 				echo $Building;
 				echo " ";
 				echo $row['roomID'];
@@ -200,7 +195,7 @@ document.write(myMessage);
 				echo $starttime;
 				echo "'/>";
 				echo " <input type='hidden' name='endtime' value='";
-				echo $duration;
+				echo $endtime;
 				echo "'/> ";
 				echo " <input type='hidden' name='date' value='";
 				echo $date;
