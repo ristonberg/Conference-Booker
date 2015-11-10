@@ -17,9 +17,7 @@
 <body>
 <h2>
 <script Language="JavaScript">
-
 hitme();
-
 document.fgColor = textColor();
 var myMessage= Greetings();
 document.write(myMessage);
@@ -76,15 +74,14 @@ document.write(myMessage);
 <h4>Search avaiable Room</h4>
 
 <label for="Building">Building</label>
-<select id="Building" name="Building">
 <?php
 	echo '<select id="Building" name="Building">';
 	$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 	$sql = "SELECT BuildCode, BuildName FROM Building";
 	$query=mysqli_query($conn, $sql);
-	while ($_SESSION['row']=mysqli_fetch_array($query)){
-		$BuildCode = $_SESSION['row']['BuildCode'];
-		$BuildName = $_SESSION['row']['BuildName'];
+	while ($row=mysqli_fetch_array($query)){
+		$BuildCode = $row['BuildCode'];
+		$BuildName = $row['BuildName'];
 		echo "<option value='";
 		echo $BuildCode;
 		echo "'>";
