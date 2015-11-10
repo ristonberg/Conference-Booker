@@ -38,6 +38,7 @@ document.write(myMessage);
     echo " ";
     echo $_SESSION['row']['lastname'];
     echo '</header>';
+    $user_id=$_SESSION['row']['id'];
     ?>
 
 <aside class = "NavSiderbar">
@@ -75,9 +76,8 @@ document.write(myMessage);
 	$date=$_POST["date"];
 	$endtime=$starttime;
 	for($x=0; $x<$duration; $x++){
-		$endtime=strtotime("+30 mins", strtotime($endtime));
+		$endtime=date('H:i', strtotime($endtime)+1800);
 	}
-	$endtime=$startime+$duration;
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 	// Check connection
 	if (!$conn) {
@@ -87,7 +87,7 @@ document.write(myMessage);
 	foreach($_POST["checkedBoxes"] as $box){
 		$roomID=$box;
 		$sql = "INSERT INTO Appt (ConfID, user, date, starttime, endtime)
-	VALUES ('$roomID', '$userid', '$date', '$starttime', '$endtime')";
+	VALUES ('$roomID', '$user_id', '$date', '$starttime', '$endtime')";
 	}
 ?>
 
