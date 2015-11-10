@@ -69,25 +69,28 @@ document.write(myMessage);
 <br>
 
 <?php
-	date_default_timezone_set('America/Chicago');
-
-	$starttime=$_POST["starttime"];
-	$duration=$_POST["duration"];
-	$date=$_POST["date"];
-	$endtime=$starttime;
-	for($x=0; $x<$duration; $x++){
-		$endtime=date('H:i', strtotime($endtime)+1800);
-	}
+	if ($_POST) {
+		date_default_timezone_set('America/Chicago');
+		$starttime=$_POST["start"];
+		$endtime=$_POST["endtime"];
+		$date=$_POST["date"];
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
-	// Check connection
-	if (!$conn) {
-    	die("Connection failed: " . mysqli_connect_error());
-	}
-
-	foreach($_POST["checkedBoxes"] as $box){
-		$roomID=$box;
-		$sql = "INSERT INTO Appt (ConfID, user, date, starttime, endtime)
-	VALUES ('$roomID', '$user_id', '$date', '$starttime', '$endtime')";
+	
+		// Check connection
+		if (!$conn) {
+			die("Connection failed: " . mysqli_connect_error());
+		}
+	
+		$roomID=$_POST['room'];
+		$sql = "INSERT INTO Appt (roomID, user, date, starttime, endtime)
+		VALUES ('$roomID', '$user_id', '$date', '$starttime', '$endtime')";
+		
+		if (mysqli_query($conn, $sql)) {
+			echo "New record created successfully<br>";
+			echo '<button onclick="goBack()">Go Back</button>';
+		} else {
+			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}
 	}
 ?>
 
