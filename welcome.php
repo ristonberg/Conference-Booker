@@ -180,7 +180,13 @@ document.write(myMessage);
 		var $arr;
 		xmlhttp.onreadystatechange=function() {
 		    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		    	var $message = jQuery('#result');
 		        $arr = JSON.parse(xmlhttp.responseText);
+		        $count = $arr.length;
+		        $toSend = "You have ";
+		        $toSend += $count;
+		        $toSend += " upcoming appointment.";
+		        $message.text($toSend);
 			$('#calendar').fullCalendar({
 				header: {
 					left: 'prev,next today',
@@ -209,7 +215,7 @@ document.write(myMessage);
 <main class="Content">
     <h2>Account Overall</h2>
     <!--Check if he has Appoinment-->
-    <!-- <p> You don't have any appointment now</p> -->
+    <p id = "result"> You don't have any appointment now</p>
     <h3>Upcoming Event</h3>
     <div id='calendar'></div>  
     
