@@ -175,13 +175,14 @@ document.write(myMessage);
 				endtime <= '$endtime'))";
 		$result=mysqli_query($conn, $sql);
 		if ($result) {
+			$row=mysql_fetch_array($result)
 			echo "<form action='bookRoom.php' method='post'>";
-			while($row=mysql_fetch_array($result)){
+			while ($row != null){
 				echo " <input type='checkbox' value='".$row['RoomID']."' name='checkedBoxes[]'/> ".$row['RoomID'];
 				echo " <input type='hidden' name='start' value='".$starttime."'/> ";
 				echo " <input type='hidden' name='duration' value='".$duration."'/> ";
 				echo " <input type='hidden' name='date' value='".$date."'/> ";
-
+				$row=mysql_fetch_array($result)
 				}
 			echo "<input type='submit' value='book'>";
 			echo "</form>";
