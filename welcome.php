@@ -85,11 +85,15 @@ document.write(myMessage);
 		$sqlII="SELECT * FROM $tablenameII WHERE user = '$userID'";
 		$resultII=mysqli_query($conn, $sqlII);
 		}
+		else {
+			$firstname = $_SESSION['row']['firstname'];
+			$lastname = $_SESSION['row']['lastname'];
+		}
 
 		echo '<p class = "role">Logged in as: ';
 		echo $_SESSION['row']['rank'];
-        echo '&nbsp';
-        echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
+        	echo '&nbsp';
+        	echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
 		echo '</p>';
 		echo '<br>';
 		echo '<header class = "Disclaimer"><h1>Welcome<br>';
