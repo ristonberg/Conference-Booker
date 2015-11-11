@@ -8,8 +8,6 @@
 
 <title>Provide Room Feedback</title>
 
-<body>
-
 <style>
     #comments{
         width: 400px;
@@ -21,7 +19,6 @@ textarea:required:invalid, input:required:invalid {
     
     
 }
-
 </style>
 <script type="text/javascript" src="logOut.js"></script>
 <link rel="stylesheet" href="welcome.css">
@@ -29,11 +26,54 @@ textarea:required:invalid, input:required:invalid {
 </head>
 
 <body>
+
+	<script>
+		function getXMLHTTP() { //fuction to return the xml http object
+			var xmlhttp=false;	
+			try{
+				xmlhttp=new XMLHttpRequest();
+			}
+			catch(e)	{		
+				try{			
+					xmlhttp= new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				catch(e){
+					try{
+					xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+					}
+					catch(e1){
+						xmlhttp=false;
+					}
+				}
+			}
+				
+			return xmlhttp;
+		}
+	
+		function getBuild(strURL) {         
+			var req = getXMLHTTP(); // fuction to get xmlhttp object
+			if (req) {
+				req.onreadystatechange = function() {
+					if (req.readyState == 4) { //data is retrieved from server
+						if (req.status == 200) { // which reprents ok status                    
+							document.getElementById('builddiv').innerHTML=req.responseText;
+						}
+						else
+						{ 
+							alert("There was a problem while using XMLHTTP:\n");
+						}
+					}            
+				}        
+				req.open("GET", strURL, true); //open url using get method
+				req.send(null);
+			}
+		}
+	
+	</script>
+	
 <h2>
 <script Language="JavaScript">
-
 hitme();
-
 document.fgColor = textColor();
 var myMessage= Greetings();
 document.write(myMessage);
@@ -80,9 +120,31 @@ document.write(myMessage);
 
 <h3>Provide New Feedback </h3>
 <input type="hidden" id="userid" name="userid" value="<?=$_SESSION['row']['id'];?>"/>
-<label for="id">Room ID: </label>
- <input id="id" name="id" type="number" min="1" max="10000000" step="1" placeholder="e.g. 123456" required><br><br>
-     
+	Building : 
+		<select id="building "name="building" onChange="getBuild('findbuild.php?building='+this.value)">
+			<option value="">Select Building</option>
+			<?php
+				$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
+				$sql = "SELECT BuildCode, BuildName FROM Building";
+				$query=mysqli_query($conn, $sql);
+				while ($row=mysqli_fetch_array($query)){
+					$BuildCode = $row['BuildCode'];
+					$BuildName = $row['BuildName'];
+					echo "<option value='";
+					echo $BuildCode;
+					echo "'>";
+					echo $BuildName;
+					echo "</option>";
+				}
+			?>
+		</select>
+		<br />
+		<div id="builddiv">
+		Room : 
+			<select name="select">
+				<option>Select Room</option>
+			</select>
+		</div>
 <label for="overall">Rate your overall experience: </label>
 <select id="overall" name="overall" required>
 <option value="0">0</option>
