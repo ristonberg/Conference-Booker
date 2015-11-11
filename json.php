@@ -3,9 +3,12 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
+session_start();
+$id = $_SESSION['row']['id'];
+
 $conn = new mysqli("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 
-$result = $conn->query("SELECT roomID, user, date, starttime, endtime FROM Appt");
+$result = $conn->query("SELECT roomID, date, starttime, endtime FROM Appt where user ='$id'");
 
 $outp = "[";
 while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
