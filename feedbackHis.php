@@ -15,6 +15,7 @@
 <script type="text/javascript" src='lib/jquery.min.js'></script>
 <script type="text/javascript" src='lib/fullcalendar.min.js'></script>
 
+
 <style>
 	#calendar {
 		max-width: 900px;
@@ -112,7 +113,7 @@ document.write(myMessage);
             <li><a href= "myprofile.php">My Profile</a></li><br>
             <li><a href= "searchroom.php">Book/Cancel a Room</a></li><br>
             <li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
-			<li><a href= "feedbackHis.php">Feedback History</a></li><br>
+            <li><a href= "feedbackHis.php">Feedback History</a></li><br>
             <li><a href= "apptHis.php">Appointment History</a></li><br>
             
         </ul>
@@ -130,95 +131,13 @@ document.write(myMessage);
             </nav>
 </aside>
 
-<script>
-// 	//  create data for appointment array, 
-// 	// 	where each 
-// 	//  appointment = {
-// 	// 		date: $row['date'],
-// 	// 		starttime: $row['starttime'],
-// 	// 		endtime: $row['endtime'],
-// 	// 		room: $row['ConfID']
-// 	// 	}
+<script type="text/javascript" src="feedbackHis.js"></script>
 
-// 	var appArray = [];
-// 	var eachApp = {};
-// 	<?php $newRow = mysqli_fetch_assoc($resultII) ?>
-// 	var data = "<?php echo $newRow ?>";
-// 	while (data){
-// 		eachApp = {
-// 			date: "<?php echo $newRow['date']?>",
-// 			starttime: "<?php echo $newRow['starttime']?>",
-// 			endtime: "<?php echo $newRow['endtime']?>",
-// 			room: "<?php echo $newRow['ConfID']?>"
-// 		};
-// 		appArray.push(eachApp);
-// 		var data = "<?php echo $newRow ?>";
-// 		<?php $newRow = mysqli_fetch_assoc($resultII) ?>
-// 	}
-
-	
-
-	
-
-	var today = new Date();
-	var dd = today.getDate();
-	var mm = today.getMonth()+1; 
-	var yyyy = today.getFullYear();
-
-	if(dd<10) {
-	    dd='0'+dd
-	} 
-
-	if(mm<10) {
-	    mm='0'+mm
-	} 
-
-	today = yyyy + "-" + mm + "-" + dd;
-
-	$(document).ready(function() {
-		var xmlhttp = new XMLHttpRequest();
-		var url = "http://176.32.230.252/xuezheng.com/json/json.php";
-		var $arr;
-		xmlhttp.onreadystatechange=function() {
-		    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-		    	var $message = jQuery('#result');
-		        $arr = JSON.parse(xmlhttp.responseText);
-		        $count = $arr.length;
-		        $toSend = "You have ";
-		        $toSend += $count;
-		        $toSend += " upcoming appointment.";
-		        $message.text($toSend);
-			$('#calendar').fullCalendar({
-				header: {
-					left: 'prev,next today',
-					center: 'title',
-					right: 'month,agendaWeek,agendaDay'
-				},
-				
-				defaultDate: today,
-				//editable: true,
-				eventLimit: true, 
-				events: $arr
-			});
-
-		        console.log("yes");
-		        console.log("arr: ", $arr);
-		    }
-
-		}
-		xmlhttp.open("GET", url, true);
-		xmlhttp.send();
-		
-
-		
-	});
-</script>
 <main class="Content">
-    <h2>Account Overall</h2>
-    <!--Check if he has Appoinment-->
-    <p id = "result"> You don't have any appointment now</p>
-    <h3>Upcoming Event</h3>
-    <div id='calendar'></div>  
+    <h2>Feedback History</h2>
+    <!--List Feedback-->
+    <ul class = "result"> <!-- Do not Delete --></ul>
+    <!--List future appointmen-->
     
     
     <footer class="Disclaimer">
