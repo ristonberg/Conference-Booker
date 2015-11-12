@@ -1,5 +1,6 @@
 <?php
-// returns only upcoming appointment
+// JSON for appointment history
+// returns only past appointments
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
@@ -14,16 +15,10 @@ $outp = "[";
 while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
     $timestamp = $rs["date"] ."T"  .$rs["endtime"];
 	$date = new DateTime($timestamp);
-	//echo($timestamp);
+	
 	$dateII = new DateTime();
 	
-	// echo $date->format("U");
-	// echo "<br/>";
-	// echo $dateII->format("U");
-	// echo "RESULT: ";
-	// echo $date->format("U") < $dateII->format("U");
-	
-	if (!($date->format("U") < $dateII->format("U"))){
+	if (($date->format("U") < $dateII->format("U"))){
 		if ($outp != "[") {$outp .= ",";}
     	$outp .= '{"title":"' ."Room"  . $rs["roomID"] . '",';
     	$outp .= '"start":"'   . $rs["date"] ."T"  .$rs["starttime"]      . '",';
