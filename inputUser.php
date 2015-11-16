@@ -7,6 +7,8 @@ $password = $_POST["password"];
 $birthDate = $_POST["birthDate"];
 $age = $_POST["age"];
 $gender = $_POST["gender"];
+$rank = $_POST["rank"];
+$owner = $_POST["owner"];
 
 // Create connection
 $conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
@@ -15,8 +17,8 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "INSERT INTO users (firstname, lastname, id, email, password, birthdate, age, gender)
-VALUES ('$firstname', '$lastname', '$id', '$email', '$password', '$birthDate', '$age', '$gender')";
+$sql = "INSERT INTO users (firstname, lastname, id, email, password, birthdate, age, gender, rank, owner)
+VALUES ('$firstname', '$lastname', '$id', '$email', '$password', '$birthDate', '$age', '$gender', '$rank', '$owner')";
 
 if (mysqli_query($conn, $sql)) {
     echo "New record created successfully";

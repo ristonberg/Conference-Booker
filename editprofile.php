@@ -42,6 +42,24 @@ document.write(myMessage);
 
 <aside class = "NavSiderbar">
 <nav>
+    	<?php
+			if($_SESSION['row']['rank'] == "Admin"):
+				echo '<h3 class = "subtitle">Admin Tools</h3>';
+				echo '<ul>';
+					echo '<li><a href= "assignUserForm.html">Add New User</a></li><br>';
+					echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
+				echo '</ul>';
+			else:
+				echo '<p>HI</p>';
+			endif;
+			if($_SESSION['row']['rank'] == "Manager"):
+				echo '<h3 class = "subtitle">Manager Tools</h3>';
+				echo '<ul>';
+					echo '<li><a href= "assignUserForm.html">Add New User</a></li><br>';
+					echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
+				echo '</ul>';
+			endif;
+		?> 
 <h2 class = "subtitle">Contents</h2>
 <ul>
 <li><a href= "welcome.php">Overall</a></li><br>
@@ -51,17 +69,6 @@ document.write(myMessage);
 <li><a href= "feedbackHis.php">Feedback History</a></li><br>
 <li><a href= "apptHis.php">Appointment History</a></li><br>
 </ul>
-		<?php
-			if($_SESSION['row']['rank'] == "Admin"):
-				echo '<h3 class = "subtitle">ADMIN</h3>';
-				echo '<ul>';
-					echo '<li><a href= "AssignUserForm.html">Add New User</a></li><br>';
-					echo '<li><a href= "index.html">Update User Rank</a></li><br>';
-				echo '</ul>';
-			else:
-				echo '<p>HI</p>';
-			endif;
-		?>
 </nav>
 </aside>
 <main class="Content">
