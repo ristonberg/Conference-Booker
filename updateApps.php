@@ -11,7 +11,7 @@ if (!$conn)
         die("Connection failed: " . mysqli_connect_error());
     }
 
-$sql = "DELETE FROM 'Appt' WHERE appID = '$appID'";
+$sql = "DELETE FROM Appt WHERE appID = '$appID'";
 $delete = mysqli_query($conn, $sql);
 echo "<br>";
 echo "Delete: " + $delete; 
