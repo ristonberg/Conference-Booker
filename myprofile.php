@@ -99,7 +99,7 @@ document.write(myMessage);
 ?>
 
 
-    <a href= "editprofile.php">Edit My Profile</a>
+    <ul><a href= "editprofile.php">Edit My Profile</a></ul>
         
     
     
