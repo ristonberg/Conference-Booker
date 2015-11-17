@@ -12,16 +12,23 @@ $(document).ready(function() {
 	        $toSend = '<h4>You have ';
 	        $toSend += $count;
 	        $toSend += ' appointment in the past.</h4>';
+	        $toSend += "<hr> ";
 	        while($arr.length>0){
 	        	var $appt = $arr.pop();
 	        	$toSend += "<p>";
+	        	$toSend += "Reservation ID: ";
+	        	$toSend += $appt["appID"];
+	        	$toSend += "</p><p>";
 	        	$toSend += $appt["title"];
-	        	$toSend += " Start time: ";
+	        	$toSend += "</p><p>";
+	        	$toSend += " Date: ";
+	        	$toSend += $appt["date"];
+	        	$toSend += " </p><p>Time: ";
 	        	$toSend += $appt["start"];
-	        	$toSend += " End time: ";
+	        	$toSend += " --- ";
 	        	$toSend += $appt["end"];
-	        	$toSend += " ";
 	        	$toSend += "</p>";
+	        	$toSend += "<hr> ";
 
 	        }
 	    
@@ -36,7 +43,7 @@ $(document).ready(function() {
 
 
 	var xmlhttpII = new XMLHttpRequest();
-	var urlII = "http://176.32.230.252/xuezheng.com/json/json.php";
+	var urlII = "http://176.32.230.252/xuezheng.com/json/jsonIV.php";
 	var $arrII;
 	xmlhttpII.onreadystatechange=function() {
 	    if (xmlhttpII.readyState == 4 && xmlhttpII.status == 200) {
@@ -45,17 +52,24 @@ $(document).ready(function() {
 	        $countII = $arrII.length;
 	        $toSendII = '<h4>You have ';
 	        $toSendII += $countII;
-	        $toSendII += ' appointment in the future.</h4>';
+	        $toSendII += ' reservation in the future.</h4>';
+	        $toSendII += "<hr> ";
 	        while($arrII.length>0){
 	        	var $apptII = $arrII.pop();
 	        	$toSendII += "<p>";
+	        	$toSendII += "Reservation ID: ";
+	        	$toSendII += $apptII["appID"];
+	        	$toSendII += "</p><p>";
 	        	$toSendII += $apptII["title"];
-	        	$toSendII += " Start time: ";
+	        	$toSendII += "</p><p>";
+	        	$toSendII += " Date: ";
+	        	$toSendII += $apptII["date"];
+	        	$toSendII += " </p><p>Time: ";
 	        	$toSendII += $apptII["start"];
-	        	$toSendII += " End time: ";
+	        	$toSendII += " --- ";
 	        	$toSendII += $apptII["end"];
-	        	$toSendII += " ";
 	        	$toSendII += "</p>";
+	        	$toSendII += "<hr> ";
 
 	        }
 	       
