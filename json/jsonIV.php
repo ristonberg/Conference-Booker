@@ -1,6 +1,6 @@
 <?php
 // JSON for appointment history
-// returns only past appointments
+// returns only future appointments
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
@@ -18,7 +18,7 @@ while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
 	
 	$dateII = new DateTime();
 	
-	if (($date->format("U") < $dateII->format("U"))){
+	if (!($date->format("U") < $dateII->format("U"))){
 		if ($outp != "[") {$outp .= ",";}
     	$outp .= '{"title":"' ."Room: "  . $rs["roomID"] . '",';
     	$outp .= '"appID":"'   . $rs["appID"]  . '",';

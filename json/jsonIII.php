@@ -9,7 +9,7 @@ $id = $_SESSION['row']['id'];
 
 $conn = new mysqli("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 
-$result = $conn->query("SELECT  roomid, rating, comments, date, starttime, endtime 
+$result = $conn->query("SELECT ID, appID, roomid, rating, comments, date, starttime, endtime 
 	FROM `cl57-xuezheng`.Appt LEFT JOIN `cl57-xuezheng`.Feedback USING(appid) 
 	where user = $id and not rating is null");
 
@@ -22,11 +22,14 @@ while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
 	
 	if (($date->format("U") < $dateII->format("U"))){
 		if ($outp != "[") {$outp .= ",";}
-    	$outp .= '{"title":"' ."Room"  . $rs["roomid"] . '",';
+    	$outp .= '{"title":"' ."Room: "  . $rs["roomid"] . '",';
     	$outp .= '"rating":"'  . $rs["rating"] . '",';
+    	$outp .= '"appID":"'   . $rs["appID"]  . '",';
+    	$outp .= '"ID":"'   . $rs["ID"]  . '",';
     	$outp .= '"comments":"'  . $rs["comments"] . '",';
-    	$outp .= '"start":"'   . $rs["date"] ."T"  .$rs["starttime"]      . '",';
-    	$outp .= '"end":"'   . $rs["date"] ."T"  .$rs["endtime"]      . '"}';
+    	$outp .= '"date":"'   . $rs["date"]      . '",';
+    	$outp .= '"start":"'  .$rs["starttime"]      . '",';
+    	$outp .= '"end":"'    .$rs["endtime"]      . '"}';
 	}
 
     

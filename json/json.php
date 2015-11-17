@@ -1,5 +1,5 @@
 <?php
-// json for calendar and appointment history
+// json for calendar 
 // returns only upcoming appointment
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
