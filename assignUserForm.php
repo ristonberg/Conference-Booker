@@ -1,12 +1,25 @@
+<?php
+    session_start();
+    echo '<p class = "role">Successful logged in as: ';
+    echo $_SESSION['row']['rank'];
+    echo '&nbsp';
+    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
+    echo '</p><br>';
+    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
+    echo $_SESSION['row']['firstname'];
+    echo " ";
+    echo $_SESSION['row']['lastname'];
+    echo '</header>';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Assign User Form</title>
   <link href="assignUserForm.css" rel="stylesheet">
-      <script type="text/javascript" src="logOut.js"></script>
+  <script type="text/javascript" src="logOut.js"></script>
 
-    <script type="text/javascript" src="background.js"></script>
+  <script type="text/javascript" src="background.js"></script>
 
 
 <style>
@@ -51,6 +64,7 @@ function validateForm() {
 
 </head>
 <body>
+
     <h2>
         <script Language="JavaScript">
             
@@ -75,7 +89,7 @@ function validateForm() {
       <input id="email" name="email" type="email" placeholder="e.g. qwer@qwer.com" required><br>
       <label for="password">Password <em>*</em></label>
       <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><br>
-      <!--<label for="rank">Status</label>-->
+      <label for="rank">Status</label>
       <?php
       	if($_SESSION['row']['rank'] == "Admin"):
       		echo '<select id="rank" name="rank">';
