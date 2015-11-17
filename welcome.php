@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +40,6 @@ document.write(myMessage);
 </h2>
 	<?php
         // Start the session
-        session_start();
 
         // if user has already logged in
         // skip connecting database

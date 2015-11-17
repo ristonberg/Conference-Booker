@@ -1,3 +1,17 @@
+<?php
+    session_start();
+    echo '<p class = "role">Successful logged in as: ';
+    echo $_SESSION['row']['rank'];
+    echo '&nbsp';
+    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
+    echo '</p><br>';
+    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
+    echo $_SESSION['row']['firstname'];
+    echo " ";
+    echo $_SESSION['row']['lastname'];
+    echo '</header>';
+    $user_id=$_SESSION['row']['id'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,20 +40,6 @@ document.write(myMessage);
 </script>
 </h2>
 
-<?php
-    session_start();
-    echo '<p class = "role">Successful logged in as: ';
-    echo $_SESSION['row']['rank'];
-    echo '&nbsp';
-    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
-    echo '</p><br>';
-    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
-    echo $_SESSION['row']['firstname'];
-    echo " ";
-    echo $_SESSION['row']['lastname'];
-    echo '</header>';
-    $user_id=$_SESSION['row']['id'];
-    ?>
 
 <aside class = "NavSiderbar">
 <nav>
