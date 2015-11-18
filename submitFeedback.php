@@ -12,7 +12,7 @@
 
 	<script>
 		function goBack() {
-			window.history.go(-1);
+			window.location.href = "welcome.php";
 		}
 	</script>
 	
@@ -22,6 +22,7 @@
 	<?php
 		$roomid = $_POST["roomid"];
 		$userid = $_POST["userid"];
+		$building = $_POST["building"];
 		$rating = $_POST["overall"];
 		$comments = $_POST["comments"];
 		// Create connection
@@ -30,18 +31,29 @@
 		if (!$conn) {
 			die("Connection failed: " . mysqli_connect_error());
 		}
-		$sql = "INSERT INTO Feedback (roomid, userid, rating, comments)
-			Values ('$roomid', '$userid', '$rating', '$comments')";
+		$sql = "INSERT INTO Feedback (rating, comments, Building, roomID, userID)
+			Values ('$rating', '$comments', '$building', '$roomid', '$userid')";
 		if (mysqli_query($conn, $sql)) {
 			echo "Feedback successfully submitted<br>";
-			echo '<button onclick="goBack()">Go Back</button>';
 		} else {
 			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}
+		$query = "UPDATE Conf_rooms SET AvgRating = 
+				(SELECT avg(rating) as average_rate FROM Feedback
+					WHERE roomID = '$roomid' AND Building = '$building')
+				WHERE roomID = '$roomid' AND Building = '$building'";
+		if (mysqli_query($conn, $query)) {
+			echo "AvgRating successfully submitted <br>";
+		}
+		else {
+			echo "This didn't work!" . mysqli_error($conn);
 		}
 		mysqli_close($conn);
 	?>
 	
-	
-	
+	<script type="text/javascript">
+		goBack();
+	</script>
+
 </body>
 </html>
