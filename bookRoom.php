@@ -32,6 +32,10 @@
 <h2>
 <script Language="JavaScript">
 
+	function goBack() {
+		window.location.href = "welcome.php";
+	}
+
 hitme();
 
 document.fgColor = textColor();
@@ -99,7 +103,7 @@ document.write(myMessage);
 		
 		if (mysqli_query($conn, $sql)) {
 			echo "New record created successfully<br>";
-			echo '<button onclick="goBack()">Go Back</button>';
+			echo "<script type="text/javascript"> goBack(); </script>";
 		} else {
 			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 		}
