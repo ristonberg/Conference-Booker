@@ -101,7 +101,7 @@ document.write(myMessage);
 		
 		if (mysqli_query($conn, $sql)) {
 			echo "New record created successfully<br>";
-			echo "<script type="text/javascript"> goBack(); </script>";
+			echo "<script type='text/javascript'> goBack(); </script>";
 		} else {
 			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 		}
