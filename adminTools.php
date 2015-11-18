@@ -1,3 +1,16 @@
+<?php
+    session_start();
+    echo '<p class = "role">Successful logged in as: ';
+    echo $_SESSION['row']['rank'];
+    echo '&nbsp';
+    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
+    echo '</p><br>';
+    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
+    echo $_SESSION['row']['firstname'];
+    echo " ";
+    echo $_SESSION['row']['lastname'];
+    echo '</header>';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,43 +39,26 @@ document.write(myMessage);
 </script>
 </h2>
 
-<?php
-    session_start();
-    echo '<p class = "role">Successful logged in as: ';
-    echo $_SESSION['row']['rank'];
-    echo '&nbsp';
-    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
-    echo '</p><br>';
-    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
-    echo $_SESSION['row']['firstname'];
-    echo " ";
-    echo $_SESSION['row']['lastname'];
-    echo '</header>';
-    ?>
-
-
 <aside class = "NavSiderbar">
 <nav>
-<<<<<<< HEAD
+
     	<?php
 			if($_SESSION['row']['rank'] == "Admin"):
 				echo '<h3 class = "subtitle">Admin Tools</h3>';
 				echo '<ul>';
 					echo '<li><a href= "assignUserForm.php">Add New User</a></li><br>';
 					echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
-					echo '</ul>';
-			else:
-				echo '<p>HI</p>';
+				echo '</ul>';
 			endif;
-			if($_SESSION['row']['rank'] == "Manager");
+			if($_SESSION['row']['rank'] == "Manager"):
 				echo '<h3 class = "subtitle">Manager Tools</h3>';
 				echo '<ul>';
 					echo '<li><a href= "assignUserForm.php">Add New User</a></li><br>';
 					echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
-					echo '</ul>';
-		?>
-=======
->>>>>>> 70cf3069d833cde1e196b9c42135e5e706185701
+				echo '</ul>';
+			endif;
+		?> 
+
 <h2 class = "subtitle">Contents</h2>
 <ul>
 <li><a href= "welcome.php">Overall</a></li><br>

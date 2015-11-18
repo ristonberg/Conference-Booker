@@ -103,8 +103,6 @@ document.write(myMessage);
 					echo '<li><a href= "assignUserForm.php">Add New User</a></li><br>';
 					echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
 				echo '</ul>';
-			else:
-				echo '<p>HI</p>';
 			endif;
 			if($_SESSION['row']['rank'] == "Manager"):
 				echo '<h3 class = "subtitle">Manager Tools</h3>';
