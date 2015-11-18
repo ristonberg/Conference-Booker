@@ -99,7 +99,10 @@ function validateForm() {
 		elseif($_SESSION['row']['rank'] == "Manager"):
 			echo '<input type = "hidden" name="rank" value="User">';
 		endif;
-		$user_id=$_SESSION['row']['id'];			
+		$user_id=$_SESSION['row']['id'];
+		echo "<input type = 'hidden' name='user_id' value='";
+		echo $user_id;
+		echo "'>";			
 	?>
 	</fieldset>
 	<fieldset>

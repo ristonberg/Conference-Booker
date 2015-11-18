@@ -8,7 +8,7 @@ $birthDate = $_POST["birthDate"];
 $age = $_POST["age"];
 $gender = $_POST["gender"];
 $rank = $_POST["rank"];
-$owner = $_POST["owner"];
+$user_id = $_POST["user_id"];
 
 // Create connection
 $conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
@@ -18,7 +18,7 @@ if (!$conn) {
 }
 
 $sql = "INSERT INTO users (firstname, lastname, id, email, password, birthdate, age, gender, rank, owner)
-VALUES ('$firstname', '$lastname', '$id', '$email', '$password', '$birthDate', '$age', '$gender', '$rank', '$owner')";
+VALUES ('$firstname', '$lastname', '$id', '$email', '$password', '$birthDate', '$age', '$gender', '$rank', '$user_id')";
 
 if (mysqli_query($conn, $sql)) {
     echo "New record created successfully";
