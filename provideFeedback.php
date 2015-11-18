@@ -169,10 +169,11 @@ document.write(myMessage);
 <br><br>
 
 <label for="comments">Please write some comments: </label><br>
-<textarea id="comments" oninput="validateComments(this)" required placeholder = "Please enter at least 50 chars"></textarea>
+<textarea id="comments" name="comments" oninput="validateComments(this)" required placeholder = "Please enter at less than 150 chars"></textarea>
 
+<p><input type="submit" value="Submit your feedback"></p>
 
-</select><br>
+</form>
 
 <p><input type="submit" value="Submit your feedback"></p>
 
@@ -190,8 +191,6 @@ document.write(myMessage);
 
 <p>Copyright © 2015</p>
 </footer>
-
-</form>
 
 </main>
 </body>
