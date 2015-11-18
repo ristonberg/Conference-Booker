@@ -182,12 +182,12 @@ document.write(myMessage);
 		if (!$conn) {
 			die("Connection failed: " . mysqli_connect_error());
 		}
-		$sql = "SELECT roomID FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
+		$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
 			writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
 			size >= '$size' AND Building = '$Building'
 			AND C.roomID NOT IN (
 				SELECT roomID FROM Appt WHERE date='$date' AND (starttime >= '$starttime' AND 
-				endtime <= '$endtime'))";
+				endtime <= '$endtime')) ORDER BY AvgRating DESC";
 		$result=mysqli_query($conn, $sql);
 		if($result) {
 			echo "<form action='bookRoom.php' method='post'>";
@@ -198,6 +198,8 @@ document.write(myMessage);
 				echo $Building;
 				echo " ";
 				echo $row['roomID'];
+				echo " Average Rating: ";
+				echo $row['AvgRating'];
 				echo " <input type='hidden' name='start' value='";
 				echo $starttime;
 				echo "'/>";
