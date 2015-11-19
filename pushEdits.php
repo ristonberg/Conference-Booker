@@ -19,7 +19,7 @@
 	if (!$conn) {
     	die("Connection failed: " . mysqli_connect_error());
 	}
-	$sql = "SELECT * FROM Appt WHERE date = '$date' AND starttime = $starttime";  
+	$sql = "SELECT * FROM Appt WHERE date = '$date' AND starttime = '$starttime'";  
 	$result=mysqli_query($conn, $sql);
 
 	if (!$result) {
@@ -28,7 +28,7 @@
 	}
 	if(mysqli_num_rows($result) > 0)
 	{
-		echo "That record already exists! Redirecting...";
+		echo "That record already exists! Redirecting... ";
 		sleep (3); 
 		header("Location: http://176.32.230.252/xuezheng.com/adminTools.php");
 	}
@@ -37,6 +37,8 @@
 		$sql = "UPDATE Appt SET date = '$date', starttime = ({$starttime}), endtime = ({$endtime})
 		WHERE appID = '$appID'";
 		$result=mysqli_query($conn, $sql);
+		header("Location: http://176.32.230.252/xuezheng.com/adminTools.php");
+
 	}
 
 ?>
