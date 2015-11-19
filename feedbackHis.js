@@ -7,6 +7,7 @@ $(document).ready(function() {
 	xmlhttp.onreadystatechange=function() {
 	    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 	    	var $message = jQuery('.result');
+	    	$message.text("");
 	        $arr = JSON.parse(xmlhttp.responseText);
 	        $count = $arr.length;
 	        $toSend = '<h4>You have provided ';
@@ -23,14 +24,14 @@ $(document).ready(function() {
 	        	// $toSend += $appt["appID"];
 	        	// $toSend += "</p><p>";
 	        	$toSend += $appt["title"];
-	        	$toSend += "</p><p>";
+	        	// $toSend += "</p><p>";
 	        	// $toSend += " Date: ";
 	        	// $toSend += $appt["date"];
 	        	// $toSend += " </p><p>Time: ";
 	        	// $toSend += $appt["start"];
 	        	// $toSend += " --- ";
 	        	// $toSend += $appt["end"];
-	        	$toSend += "</p>";
+	        	// $toSend += "</p>";
 	        	$toSend += " <p>Rating: ";
 	        	$toSend += $appt["rating"];
 	        	$toSend += " </p><p>Comments: ";

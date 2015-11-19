@@ -144,10 +144,10 @@ document.write(myMessage);
     <h2>Appointment History</h2>
     <!--List past appointmen-->
     <h3>Past Appointment</h3>
-    <ul class = "result"> <!-- Do not Delete --></ul>
+    <ul class = "result"> Loading Please Wait<!-- Do not Delete --></ul>
     <!--List future appointmen-->
     <h3>Future Appointment</h3>
-    <ul class='resultII'> <!-- Do not Delete --></ul>
+    <ul class='resultII'> Loading Please Wait<!-- Do not Delete --></ul>
     
     
     <footer class="Disclaimer">

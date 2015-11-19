@@ -142,8 +142,7 @@ document.write(myMessage);
 <main class="Content">
     <h2>Feedback History</h2>
     <!--List Feedback-->
-    <ul class = "result"> <!-- Do not Delete --></ul>
-    <!--List future appointmen-->
+    <ul class = "result"> Loading Please Wait<!-- Do not Delete --></ul>
     
     
     <footer class="Disclaimer">

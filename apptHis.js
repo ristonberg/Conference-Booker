@@ -7,6 +7,7 @@ $(document).ready(function() {
 	xmlhttp.onreadystatechange=function() {
 	    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 	    	var $message = jQuery('.result');
+	    	$message.text("");
 	        $arr = JSON.parse(xmlhttp.responseText);
 	        $count = $arr.length;
 	        $toSend = '<h4>You have ';
@@ -48,6 +49,7 @@ $(document).ready(function() {
 	xmlhttpII.onreadystatechange=function() {
 	    if (xmlhttpII.readyState == 4 && xmlhttpII.status == 200) {
 	    	var $messageII = jQuery('.resultII');
+	    	$messageII.text("");
 	        $arrII = JSON.parse(xmlhttpII.responseText);
 	        $countII = $arrII.length;
 	        $toSendII = '<h4>You have ';
