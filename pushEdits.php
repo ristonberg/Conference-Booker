@@ -8,11 +8,9 @@
 	$starttime = $_POST['starttime'];
 	$duration = $_POST['duration'];
 	$endtime=$starttime;
-	for($x=0; $x<$duration; $x++){
-		$endtime=strtotime("+30 mins", strtotime($endtime));
-	}
-	$endtime=$starttime+$duration;
-	$starttime = strtotime($starttime);
+		for($x=0; $x<$duration; $x++){
+			$endtime=date('H:i', strtotime($endtime)+1800);
+		}
 	$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 	
 	// Check connection
@@ -34,7 +32,7 @@
 	}
 	else 
 	{
-		$sql = "UPDATE Appt SET date = '$date', starttime = ({$starttime}), endtime = ({$endtime})
+		$sql = "UPDATE Appt SET date = '$date', starttime = '$starttime', endtime = '$endtime'
 		WHERE appID = '$appID'";
 		$result=mysqli_query($conn, $sql);
 		header("Location: http://176.32.230.252/xuezheng.com/adminTools.php");
