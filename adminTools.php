@@ -17,9 +17,7 @@
 <body>
 <h2>
 <script Language="JavaScript">
-
 hitme();
-
 document.fgColor = textColor();
 var myMessage= Greetings();
 document.write(myMessage);
@@ -43,47 +41,51 @@ document.write(myMessage);
 
 <aside class = "NavSiderbar">
 <nav>
-    	<?php
-			if($_SESSION['row']['rank'] == "Admin"):
-				echo '<h3 class = "subtitle">Admin Tools</h3>';
-				echo '<ul>';
-					echo '<li><a href= "assignUserForm.php">Add New User</a></li><br>';
-					echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
-					echo '</ul>';
-			else:
-				echo '<p>HI</p>';
-			endif;
-			if($_SESSION['row']['rank'] == "Manager");
-				echo '<h3 class = "subtitle">Manager Tools</h3>';
-				echo '<ul>';
-					echo '<li><a href= "assignUserForm.php">Add New User</a></li><br>';
-					echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
-					echo '</ul>';
-		?>
+        <?php
+            if($_SESSION['row']['rank'] == "Admin"):
+                echo '<h3 class = "subtitle">Admin Tools</h3>';
+                echo '<ul>';
+                    echo '<li><a href= "assignUserForm.html">Add New User</a></li><br>';
+                    echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
+                echo '</ul>';
+            else:
+                echo '<p>HI</p>';
+            endif;
+            if($_SESSION['row']['rank'] == "Manager"):
+                echo '<h3 class = "subtitle">Manager Tools</h3>';
+                echo '<ul>';
+                    echo '<li><a href= "assignUserForm.html">Add New User</a></li><br>';
+                    echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
+                echo '</ul>';
+            endif;
+        ?> 
 <h2 class = "subtitle">Contents</h2>
 <ul>
 <li><a href= "welcome.php">Overall</a></li><br>
 <li><a href= "myprofile.php">My Profile</a></li><br>
-<li><a href= "searchoom.php">Book/Cancel a Room</a></li><br>
+<li><a href= "searchroom.php">Book/Cancel a Room</a></li><br>
 <li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
-<li><a href= "index.html">Feedback History</a></li><br>
-<li><a href= "index.html">Appointment History</a></li><br>
-<li><a href = "adminTools.php"> Admin Tools </a></li><br>
+<li><a href= "feedbackHis.php">Feedback History</a></li><br>
+<li><a href= "apptHis.php">Appointment History</a></li><br>
+
 </ul>
 </nav>
 </aside>
-<main class="Content">
+
 
 
 <?php
     $conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
-
+    $user = $_SESSION['row']['id'];
     if (!$conn) 
     {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $sql = "SELECT * FROM Appt";
+    if($_SESSION['row']['rank'] == "Admin" || $_SESSION['row']['rank'] == "Manager")
+        $sql = "SELECT * FROM Appt a INNER JOIN users u ON a.user = u.id WHERE u.owner = '$user' OR u.id = '$user'";
+    else 
+        $sql = "SELECT * FROM Appt WHERE user = '$user'";
 
     $result = mysqli_query($conn, $sql);
 
@@ -92,7 +94,7 @@ document.write(myMessage);
  
         echo "<form id ='appTable' action = 'updateApps.php' method='post'>";
         echo "<table BORDER = '2'>";
-        echo "<th width='130'>Appointment</th>";
+        echo "<th width='130'>Appointment #</th>";
         echo "<th width='130'>Room</th>";
         echo "<th width='130'>User</th>";
         echo "<th width='130'>Date</th>";
@@ -106,27 +108,35 @@ document.write(myMessage);
             $date = $row['date'];
             $starttime = $row['starttime'];
             $endtime = $row['endtime']; 
-            echo "<tr><td id='appID'>".$appID."</td><td>".$roomID."</td><td contenteditable ='true'>".$user.
-            "</td><td input type='date' contenteditable = 'true'>".$date."</td><td>".$starttime.
-            "</td><td>".$endtime."</td><td><button type='button' class='btn' onClick='deleteRow(this)''>Delete</button></td></tr>";   
+            echo "<tr><td id='appID'>".$appID."</td><td>".$roomID."</td><td>".$user.
+            "</td><td input type='date'>".$date."</td><td>".$starttime.
+            "</td><td>".$endtime."</td><td><button type='button' class='btn' onClick='editRow(this)''>Edit</button></td>
+            <td><button type='button' class='btn' onClick='deleteRow(this)''>Delete</button></td></tr>";   
         }
         echo "</table>";
         echo "</form>";
     }
 
     mysqli_close($conn);
+
 ?>
 
 <script>
 
 function deleteRow(btn) {
   var row = btn.parentNode.parentNode;
-  row.parentNode.removeChild(row);
   if(confirm('Are you sure you want to delete the appointment on ' + row.cells[3].innerHTML + 
              ' starting at ' + row.cells[4].innerHTML + '?'))
     {
+        row.parentNode.removeChild(row);
         window.location.href = "updateApps.php?appID=" + row.cells[0].innerHTML;
     }
 }
-
+function editRow(btn)
+{
+    var row = btn.parentNode.parentNode;
+    window.location.href = "editApps.php?appID=" + row.cells[0].innerHTML + "&roomID=" 
+    + row.cells[1].innerHTML + "&user=" + row.cells[2].innerHTML + "&date=" + row.cells[3].innerHTML
+    + "&startime=" + row.cells[4].innerHTML + "&endtime=" + row.cells[5].innerHTML; 
+}
 </script>
