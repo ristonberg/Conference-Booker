@@ -29,7 +29,7 @@
 	if(mysqli_num_rows($result) > 0)
 	{
 		echo "That record already exists!";
-		sleep <2>
+		sleep 2; 
 		header("Location: http://176.32.230.252/xuezheng.com/adminTools.php");
 	}
 	else 
