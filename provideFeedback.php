@@ -175,8 +175,6 @@ document.write(myMessage);
 
 </form>
 
-<p><input type="submit" value="Submit your feedback"></p>
-
 
 
 
