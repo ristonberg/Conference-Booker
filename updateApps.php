@@ -1,9 +1,7 @@
 <?php
 //$appID = $_POST["appID"]
 $appID = (int)$_GET['appID'];
-echo $appID;
-echo "<br>";
-echo gettype($appID); 
+echo $appID; 
 $conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 
 if (!$conn) 
@@ -11,10 +9,12 @@ if (!$conn)
         die("Connection failed: " . mysqli_connect_error());
     }
 
+$sql = "DELETE FROM Feedback WHERE appID = '$appID'";
+mysqli_query($conn, $sql);
+
 $sql = "DELETE FROM Appt WHERE appID = '$appID'";
 $delete = mysqli_query($conn, $sql);
-echo "<br>";
-echo "Delete: " + $delete; 
+
 if($delete)
 {
 	echo "Success!";
