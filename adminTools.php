@@ -43,7 +43,6 @@ document.write(myMessage);
 
 <aside class = "NavSiderbar">
 <nav>
-<<<<<<< HEAD
     	<?php
 			if($_SESSION['row']['rank'] == "Admin"):
 				echo '<h3 class = "subtitle">Admin Tools</h3>';
