@@ -14,14 +14,7 @@
 	$endtime=$starttime+$duration;
 	$starttime = strtotime($starttime);
 	$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
-	echo $appID; 
-	echo "<br/>";
-	echo $roomID;
-	echo "<br/>"; 
-	echo $user; echo "<br/>";
-	echo $starttime; echo "<br/>";
-	echo $endtime; echo "<br/>";
-	echo $date; 
+	
 	// Check connection
 	if (!$conn) {
     	die("Connection failed: " . mysqli_connect_error());
@@ -36,6 +29,8 @@
 	if(mysqli_num_rows($result) > 0)
 	{
 		echo "That record already exists!";
+		sleep <2>
+		header("Location: http://176.32.230.252/xuezheng.com/adminTools.php");
 	}
 	else 
 	{
