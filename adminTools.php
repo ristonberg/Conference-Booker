@@ -60,8 +60,6 @@ document.write(myMessage);
 					echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
 					echo '</ul>';
 		?>
-=======
->>>>>>> 70cf3069d833cde1e196b9c42135e5e706185701
 <h2 class = "subtitle">Contents</h2>
 <ul>
 <li><a href= "welcome.php">Overall</a></li><br>
@@ -71,12 +69,6 @@ document.write(myMessage);
 <li><a href= "index.html">Feedback History</a></li><br>
 <li><a href= "index.html">Appointment History</a></li><br>
 <li><a href = "adminTools.php"> Admin Tools </a></li><br>
-</ul>
-
-<h3 class = "subtitle">Something More moremore Else</h2>
-<ul>
-<li><a href= "">dsusafas</a></li><br>
-<li><a href= "index.html">afhjkbs</a></li><br>
 </ul>
 </nav>
 </aside>
