@@ -136,13 +136,26 @@ document.write(myMessage);
 <input type="hidden" id="userid" name="userid" value="<?=$_SESSION['row']['id'];?>"/>
 	Building : 
 		<select id="building" name="building" onChange="getBuild('findbuild.php?building='+this.value)">
-			<option value="building">Select Building</option>
 			<?php
-				$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
-				$sql = "SELECT BuildCode, BuildName FROM Building";
-				$query=mysqli_query($conn, $sql);
-				while ($row=mysqli_fetch_array($query)){
-					$BuildCode = $row['BuildCode'];
+				if (!$_POST){
+					echo "<option value='building'>Select Building</option>";
+					$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
+					$sql = "SELECT BuildCode, BuildName FROM Building";
+					$query=mysqli_query($conn, $sql);
+					while ($row=mysqli_fetch_array($query)){
+						$BuildCode = $row['BuildCode'];
+						$BuildName = $row['BuildName'];
+						echo "<option value='";
+						echo $BuildCode;
+						echo "'>";
+						echo $BuildName;
+						echo "</option>";
+					}
+				}
+				else{
+					$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
+					$sql = "SELECT BuildName FROM Building WHERE BuildCode = '$BuildCode'";
+					$row = mysqli_fetch_array(mysqli_query($conn, $sql));
 					$BuildName = $row['BuildName'];
 					echo "<option value='";
 					echo $BuildCode;
@@ -155,9 +168,24 @@ document.write(myMessage);
 		<br />
 		<div id="builddiv">
 		Room : 
-			<select name="select">
-				<option>Select Room</option>
-			</select>
+			<select name="roomid">
+			<?php
+				if (!$_POST) {
+					echo "<option>Select Room</option>";
+					echo "</select>";
+				}
+				else{
+					echo "<option value='";
+					echo $roomID;
+					echo "'>";
+					echo $roomID;
+					echo "</option>";
+					echo "</select>";
+					echo "<input type='hidden' name='appID' value='";
+					echo $appID;
+					echo "' />";
+				}
+			?>
 		</div>
 <label for="overall">Rate your overall experience: </label>
 
