@@ -19,8 +19,10 @@ $(document).ready(function() {
 	        	$toSend += "<p>";
 	        	$toSend += "Reservation ID: ";
 	        	$toSend += $appt["appID"];
-	        	$toSend += "</p><p>";
-	        	$toSend += $appt["title"];
+	        	$toSend += "</p><p> Room: ";
+	        	$toSend += $appt["building"];
+				$toSend += " ";
+				$toSend += $appt["room"];
 	        	$toSend += "</p><p>";
 	        	$toSend += " Date: ";
 	        	$toSend += $appt["date"];
@@ -29,6 +31,10 @@ $(document).ready(function() {
 	        	$toSend += " --- ";
 	        	$toSend += $appt["end"];
 	        	$toSend += "</p>";
+				$toSend += "<form id='appfeedback' action='provideFeedback.php' method='POST'>";
+				$toSend += "<input type='hidden' id='appID' name='appID' value='";
+				$toSend += $appt["appID"];
+				$toSend += "' /><input type='submit' value='Provide Feedback' />";
 	        	$toSend += "<hr> ";
 
 	        }
