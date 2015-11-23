@@ -1,6 +1,7 @@
 <?php
 // JSON for feedback history
 // returns all feedback of a user, {room: , time: ,rating: , comments: }
+date_default_timezone_set('America/Chicago');
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 

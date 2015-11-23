@@ -1,6 +1,7 @@
 <?php
 // JSON for appointment history
 // returns only future appointments
+date_default_timezone_set('America/Chicago');
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
