@@ -129,14 +129,14 @@ document.write(myMessage);
 </aside>
 <main class="Content">
 
-
-<form id="feedback" action="submitFeedback.php" onsubmit="return validateForm()">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<form id="feedback" method="POST" action="submitFeedback.php" onsubmit="return validateForm()">
 
 <h3>Provide New Feedback </h3>
 <input type="hidden" id="userid" name="userid" value="<?=$_SESSION['row']['id'];?>"/>
 	Building : 
-		<select id="building "name="building" onChange="getBuild('findbuild.php?building='+this.value)">
-			<option value="">Select Building</option>
+		<select id="building" name="building" onChange="getBuild('findbuild.php?building='+this.value)">
+			<option value="building">Select Building</option>
 			<?php
 				$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 				$sql = "SELECT BuildCode, BuildName FROM Building";
@@ -176,7 +176,7 @@ document.write(myMessage);
 <br><br>
 
 <label for="comments">Please write some comments: </label><br>
-<textarea id="comments" name="comments" oninput="validateComments(this)" required placeholder = "Please enter at less than 150 chars"></textarea>
+<textarea id="comments" name="comments" oninput="" required placeholder = "Please enter at less than 150 chars"></textarea>
 
 <p><input type="submit" value="Submit your feedback"></p>
 
