@@ -9,7 +9,7 @@ $id = $_SESSION['row']['id'];
 
 $conn = new mysqli("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 
-$result = $conn->query("SELECT appID, roomID, date, starttime, endtime FROM Appt where user ='$id'");
+$result = $conn->query("SELECT appID, building, roomID, date, starttime, endtime FROM Appt where user ='$id'");
 
 $outp = "[";
 while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
@@ -20,7 +20,7 @@ while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
 	
 	if (!($date->format("U") < $dateII->format("U"))){
 		if ($outp != "[") {$outp .= ",";}
-    	$outp .= '{"title":"' ."Room: "  . $rs["roomID"] . '",';
+    	$outp .= '{"title":"' ."Room: " . $rs["building"] . " " . $rs["roomID"] . '",';
     	$outp .= '"appID":"'   . $rs["appID"]  . '",';
     	$outp .= '"date":"'   . $rs["date"]      . '",';
     	$outp .= '"start":"'  .$rs["starttime"]      . '",';
