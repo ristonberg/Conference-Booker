@@ -20,9 +20,12 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+// insert inactive user
 $sql = "INSERT INTO users (firstname, lastname, id, email, password, birthdate, age, gender, rank, owner, active, confirmcode)
 VALUES ('$firstname', '$lastname', '$id', '$email', '$password', '$birthDate', '$age', '$gender', '$rank', '$user_id', '0', '$confirmcode')";
 
+// send email
+if (mysqli_query($conn, $sql)) {
 $message = 
 "
 Confirm Your Account
@@ -35,7 +38,7 @@ Reply to this email will not be recieved.
 mail($email,"User Confirmation from Conference Room Book", $message, "From: DoNotReply@xuezheng.com");
 
 
-if (mysqli_query($conn, $sql)) {
+
     echo "Confirmation email sent. Please confirm your email address.";
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
