@@ -134,9 +134,9 @@ document.write(myMessage);
 	if ($_POST) {
 		$appID = $_POST['appID'];
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
-		//echo "<input type='hidden' id='appid' name='appid' value='";
-		//echo $appID;
-		//echo "' />";
+		echo "<input type='hidden' id='appid' name='appid' value='";
+		echo $appID;
+		echo "' />";
 		
 		$sql = "SELECT building, roomID FROM Appt WHERE appID = '$appID'";
 		$row = mysqli_fetch_array(mysqli_query($conn, $sql));
@@ -194,9 +194,6 @@ document.write(myMessage);
 					echo $roomID;
 					echo "</option>";
 					echo "</select>";
-					echo "<input type='hidden' name='appID' value='";
-					echo $appID;
-					echo "' />";
 				}
 			?>
 		</div>
