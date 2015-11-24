@@ -9,7 +9,7 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $tablename = 'users';
 
-$sql="SELECT * FROM $tablename WHERE email='$email'";
+$sql="SELECT * FROM $tablename WHERE email='$email' and active = '1' ";
 $result=mysqli_query($conn, $sql);
 
 $count=mysqli_num_rows($result);
