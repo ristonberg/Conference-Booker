@@ -101,8 +101,32 @@ document.write(myMessage);
 	echo "</select>";
 ?>
 <br><br>
-<label for="date">Date</label>
-<input type="date" name="date">
+<a id = "dateRes"></a>
+
+<script>
+// get tomorrow's date
+// cant add 1 to day, in case its the last day of a month
+var today = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+
+var dd = today.getDate();
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd='0'+dd
+} 
+
+if(mm<10) {
+    mm='0'+mm
+} 
+
+today = yyyy + "-" + mm + "-" + dd;
+yyyy += 2;
+limit = yyyy + "-" + mm + "-" + dd;
+var element = document.getElementById("dateRes");
+element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' + today + ' ' + 'max = ' + limit + ' name="date">' ;
+</script>
+
 <br><br>
 <label for="startTime">Start Time</label>
 <input type="time" name="startTime">

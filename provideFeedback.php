@@ -34,6 +34,8 @@ textarea:required:invalid, input:required:invalid {
 }
 </style>
 <script type="text/javascript" src="logOut.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="stars.css">
 <link rel="stylesheet" href="welcome.css">
 
 </head>
@@ -125,20 +127,33 @@ document.write(myMessage);
 </aside>
 <main class="Content">
 
-
-<form id="feedback" action="submitFeedback.php" onsubmit="return validateForm()">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<form id="feedback" method="POST" action="submitFeedback.php" onsubmit="return validateForm()">
 
 <h3>Provide New Feedback </h3>
 <input type="hidden" id="userid" name="userid" value="<?=$_SESSION['row']['id'];?>"/>
 	Building : 
-		<select id="building "name="building" onChange="getBuild('findbuild.php?building='+this.value)">
-			<option value="">Select Building</option>
+		<select id="building" name="building" onChange="getBuild('findbuild.php?building='+this.value)">
 			<?php
-				$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
-				$sql = "SELECT BuildCode, BuildName FROM Building";
-				$query=mysqli_query($conn, $sql);
-				while ($row=mysqli_fetch_array($query)){
-					$BuildCode = $row['BuildCode'];
+				if (!$_POST){
+					echo "<option value='building'>Select Building</option>";
+					$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
+					$sql = "SELECT BuildCode, BuildName FROM Building";
+					$query=mysqli_query($conn, $sql);
+					while ($row=mysqli_fetch_array($query)){
+						$BuildCode = $row['BuildCode'];
+						$BuildName = $row['BuildName'];
+						echo "<option value='";
+						echo $BuildCode;
+						echo "'>";
+						echo $BuildName;
+						echo "</option>";
+					}
+				}
+				else{
+					$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
+					$sql = "SELECT BuildName FROM Building WHERE BuildCode = '$BuildCode'";
+					$row = mysqli_fetch_array(mysqli_query($conn, $sql));
 					$BuildName = $row['BuildName'];
 					echo "<option value='";
 					echo $BuildCode;
@@ -151,29 +166,47 @@ document.write(myMessage);
 		<br />
 		<div id="builddiv">
 		Room : 
-			<select name="select">
-				<option>Select Room</option>
-			</select>
+			<select name="roomid">
+			<?php
+				if (!$_POST) {
+					echo "<option>Select Room</option>";
+					echo "</select>";
+				}
+				else{
+					echo "<option value='";
+					echo $roomID;
+					echo "'>";
+					echo $roomID;
+					echo "</option>";
+					echo "</select>";
+					echo "<input type='hidden' name='appID' value='";
+					echo $appID;
+					echo "' />";
+				}
+			?>
 		</div>
 <label for="overall">Rate your overall experience: </label>
-<select id="overall" name="overall" required>
-<option value="0">0</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-</select>
+
+<div class="stars">
+    <input class="star star-5" id="star-5" type="radio" name="overall" value="5"/>
+    <label class="star star-5" for="star-5"></label>
+    <input class="star star-4" id="star-4" type="radio" name="overall" value="4"/>
+    <label class="star star-4" for="star-4"></label>
+    <input class="star star-3" id="star-3" type="radio" name="overall" value="3"/>
+    <label class="star star-3" for="star-3"></label>
+    <input class="star star-2" id="star-2" type="radio" name="overall" value="2"/>
+    <label class="star star-2" for="star-2"></label>
+    <input class="star star-1" id="star-1" type="radio" name="overall" value="1"/>
+    <label class="star star-1" for="star-1"></label>
+</div>
 <br><br>
 
 <label for="comments">Please write some comments: </label><br>
-<textarea id="comments" name="comments" oninput="validateComments(this)" required placeholder = "Please enter at less than 150 chars"></textarea>
+<textarea id="comments" name="comments" oninput="" required placeholder = "Please enter at less than 150 chars"></textarea>
 
 <p><input type="submit" value="Submit your feedback"></p>
 
 </form>
-
-<p><input type="submit" value="Submit your feedback"></p>
 
 
 

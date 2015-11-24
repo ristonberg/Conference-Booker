@@ -7,6 +7,7 @@ $(document).ready(function() {
 	xmlhttp.onreadystatechange=function() {
 	    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 	    	var $message = jQuery('.result');
+	    	$message.text("");
 	        $arr = JSON.parse(xmlhttp.responseText);
 	        $count = $arr.length;
 	        $toSend = '<h4>You have ';
@@ -18,8 +19,10 @@ $(document).ready(function() {
 	        	$toSend += "<p>";
 	        	$toSend += "Reservation ID: ";
 	        	$toSend += $appt["appID"];
-	        	$toSend += "</p><p>";
-	        	$toSend += $appt["title"];
+	        	$toSend += "</p><p> Room: ";
+	        	$toSend += $appt["building"];
+				$toSend += " ";
+				$toSend += $appt["room"];
 	        	$toSend += "</p><p>";
 	        	$toSend += " Date: ";
 	        	$toSend += $appt["date"];
@@ -28,6 +31,10 @@ $(document).ready(function() {
 	        	$toSend += " --- ";
 	        	$toSend += $appt["end"];
 	        	$toSend += "</p>";
+				$toSend += "<form id='appfeedback' action='provideFeedback.php' method='POST'>";
+				$toSend += "<input type='hidden' id='appID' name='appID' value='";
+				$toSend += $appt["appID"];
+				$toSend += "' /><input type='submit' value='Provide Feedback' />";
 	        	$toSend += "<hr> ";
 
 	        }
@@ -48,6 +55,7 @@ $(document).ready(function() {
 	xmlhttpII.onreadystatechange=function() {
 	    if (xmlhttpII.readyState == 4 && xmlhttpII.status == 200) {
 	    	var $messageII = jQuery('.resultII');
+	    	$messageII.text("");
 	        $arrII = JSON.parse(xmlhttpII.responseText);
 	        $countII = $arrII.length;
 	        $toSendII = '<h4>You have ';

@@ -223,7 +223,7 @@ document.write(myMessage);
 <main class="Content">
     <h2>Account Overall</h2>
     <!--Check if he has Appoinment-->
-    <p id = "result"> You don't have any appointment now</p>
+    <p id = "result"> Loading Please Wait</p>
     <h3>Upcoming Event</h3>
     <div id='calendar'></div>  
     

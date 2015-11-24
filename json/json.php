@@ -1,6 +1,7 @@
 <?php
 // json for calendar 
 // returns only upcoming appointment
+date_default_timezone_set('America/Chicago');
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
