@@ -130,6 +130,18 @@ document.write(myMessage);
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <form id="feedback" method="POST" action="submitFeedback.php" onsubmit="return validateForm()">
 
+<?php
+	if ($_POST) {
+		$appID = $_POST['appID'];
+		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
+		
+		$sql = "SELECT building, roomID FROM Appt WHERE appID = '$appID'";
+		$row = mysqli_fetch_array(mysqli_query($conn, $sql));
+		$BuildCode = $row['building'];
+		$roomID = $row['roomID'];
+	}
+?>
+
 <h3>Provide New Feedback </h3>
 <input type="hidden" id="userid" name="userid" value="<?=$_SESSION['row']['id'];?>"/>
 	Building : 
@@ -160,6 +172,9 @@ document.write(myMessage);
 					echo "'>";
 					echo $BuildName;
 					echo "</option>";
+					echo "<input type='hidden' id='appID' name='appID' value='";
+					echo $appID;
+					echo "' />";
 				}
 			?>
 		</select>
@@ -179,9 +194,6 @@ document.write(myMessage);
 					echo $roomID;
 					echo "</option>";
 					echo "</select>";
-					echo "<input type='hidden' name='appID' value='";
-					echo $appID;
-					echo "' />";
 				}
 			?>
 		</div>
