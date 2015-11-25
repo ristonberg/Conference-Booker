@@ -34,6 +34,31 @@ hitme();
 document.fgColor = textColor();
 var myMessage= Greetings();
 document.write(myMessage);
+window.onload= function() {
+		document.getElementById('recDaily').style.display='none';
+		document.getElementById('recWeekly').style.display='none';
+		document.getElementById('recMonthly').style.display='none';
+}
+
+function recursionCheck() {
+	if (document.getElementById('daily').checked) {
+		document.getElementById('recDaily').style.display='block';
+		document.getElementById('recWeekly').style.display='none';
+		document.getElementById('recMonthly').style.display='none';
+	} 
+	else if (document.getElementById('weekly').checked){
+		document.getElementById('recDaily').style.display='none';
+		document.getElementById('recWeekly').style.display='block';
+		document.getElementById('recMonthly').style.display='none';
+	} 
+	else if (document.getElementById('monthly').checked){
+		document.getElementById('recDaily').style.display='none';
+		document.getElementById('recWeekly').style.display='none';
+		document.getElementById('recMonthly').style.display='block';
+	}
+	
+}
+	
 </script>
 </h2>
 
@@ -126,10 +151,6 @@ limit = yyyy + "-" + mm + "-" + dd;
 var element = document.getElementById("dateRes");
 element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' + today + ' ' + 'max = ' + limit + ' name="date">' ;
 </script>
-
-<br><br>
-<label for="recurring">Recurring Reservation</label>
-<input type="checkbox" name="recurring"/>
 <br><br>
 <label for="startTime">Start Time</label>
 <input type="time" name="startTime">
@@ -141,6 +162,55 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 <option value="3">90</option>
 <option value="4">120</option>
 </select>
+<br><br>
+
+<label for="recurring">Recurring</label>
+<input type="checkbox" id="recurringBox" name="recurring">
+<br>
+
+<div id=recFreq>
+<label for="recfreq">Frequency of Reservation</label>
+<input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="d" id="daily"> Daily
+<input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="w" id="weekly"> Weekly
+<input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="m" id="monthly"> Monthly
+</div>
+
+<div id=recDaily>
+<label for="endDate">Last Day of Reservation</label>
+<input type="date" name="endDate" id="endDate">
+</div>
+
+<div id=recWeekly>
+<label for="endDate">Number of Weeks</label>
+<select name="endDate" id="endDate">
+<?php
+	for($i=1; $i<25; $i++) {
+		echo '<option value="$i">';
+		echo $i;
+		echo '</option>';
+	}
+?>
+</select>
+</div>
+
+<div id=recMonthly>
+<label for="endDate">Last Month of Reservation</label>
+<select name="endDate" id="endDate">
+<option value="January">January</option>
+<option value="February">February</option>
+<option value="March">March</option>
+<option value="April">April</option>
+<option value="May">May</option>
+<option value="June">June</option>
+<option value="July">July</option>
+<option value="August">August</option>
+<option value="September">September</option>
+<option value="October">October</option>
+<option value="November">November</option>
+<option value="December">December</option>
+
+</div>
+
 <br><br>
 <label for="Internet">Internet</label>
 <select id="Internet" name="Internet">
@@ -222,18 +292,11 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 				echo " <input type='radio' value='";
 				echo $row['roomID'];
 				echo "' name='room'/>";
-				echo "Room: ";
 				echo $Building;
 				echo " ";
 				echo $row['roomID'];
 				echo " Average Rating: ";
 				echo $row['AvgRating'];
-				echo " ";
-				echo "<a href='commentHis.php?roomID=";
-				echo $row['roomID'];
-				echo "&Building=";
-				echo $Building;
-				echo "' >Comments</a>";
 				echo " <input type='hidden' name='start' value='";
 				echo $starttime;
 				echo "'/>";

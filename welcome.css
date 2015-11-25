@@ -44,31 +44,40 @@ aside.NavSiderbar{
     padding-left: 25px;
 }
 
-footer a , ul a {
-  opacity: 0.6;
-  background-color: white;
-  font-weight: bold;
-  color: black;
-  padding: 5px;
-  cursor: pointer;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  border-radius: 6px; 
-  -moz-border-radius: 6px; 
-  -webkit-border-radius: 6px; 
+/*recurring checkbox elements in searchroom.php */
+#recFreq {
+	display:none;
+}
+#recurringBox:checked ~ #recFreq {
+	display:block;
+}
+/*
+#recDaily {
+	display:none; 
+}
+#daily:checked ~ #recDaily {
+	display:block;
 }
 
-ul a:visited {
-    /*color: purple;*/
+#recWeekly {
+	display:none;
+}
+#weekly:checked ~ #recWeekly {
+	display:block;
 }
 
-footer a:hover  , ul a:hover {
-    box-shadow: 5px 5px 2px grey;
-    opacity: 0.8;
-    color: white;
-    background: black;
-    border-radius: 6px; 
-    -moz-border-radius: 6px; 
-    -webkit-border-radius: 6px; 
-
+#recMonthly {
+	display:none;
 }
+#monthly:checked ~ #recMonthly {
+	display:block;
+}
+
+*/
+
+
+
+
+
+
+
