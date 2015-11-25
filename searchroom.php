@@ -128,6 +128,9 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 </script>
 
 <br><br>
+<label for="recurring">Recurring Reservation</label>
+<input type="checkbox" name="recurring"/>
+<br><br>
 <label for="startTime">Start Time</label>
 <input type="time" name="startTime">
 <br><br>
