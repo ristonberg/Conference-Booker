@@ -38,10 +38,26 @@ Reply to this email will not be recieved.
 mail($email,"User Confirmation from Conference Room Book", $message, "From: DoNotReply@xuezheng.com");
 
 
+	echo 
+	"<script>
 
-    echo "Confirmation email sent. Please confirm your email address.";
+    alert('Confirmation email sent. Please confirm the email address.');
+
+
+    window.location.href = 'http://176.32.230.252/xuezheng.com/assignUserForm.php';
+    </script>
+    ";
 } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    $error = "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo 
+	"<script>
+
+    alert('$error');
+
+
+    window.location.href = 'http://176.32.230.252/xuezheng.com/assignUserForm.php';
+    </script>
+    ";
 }
 
 mysqli_close($conn);
