@@ -22,7 +22,7 @@
 <body>
 <script type="text/javascript" src="logOut.js"></script>
 <script type="text/javascript" src="background.js"></script>
-
+<link href="assignUserForm.css" rel="stylesheet">
 <link rel="stylesheet" href="welcome.css">
 
 </head>
