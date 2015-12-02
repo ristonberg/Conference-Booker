@@ -165,11 +165,11 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 <br><br>
 
 <label for="recurring">Recurring</label>
-<input type="checkbox" id="recurringBox" name="recurring">
+<input type="checkbox" id="recurringBox" name="recurring" value="1">
 <br>
 
 <div id=recFreq>
-<label for="recfreq">Frequency of Reservation</label>
+<label for="recFreq">Frequency of Reservation</label>
 <input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="d" id="daily"> Daily
 <input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="w" id="weekly"> Weekly
 <input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="m" id="monthly"> Monthly
@@ -268,55 +268,63 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 		$screen = $_POST["Screen"];
 		$computer = $_POST["Computer"];
 		$size= $_POST["Size"];
-		
-		$endtime=$starttime;
-		for($x=0; $x<$duration; $x++){
-			$endtime=date('H:i', strtotime($endtime)+1800);
+		$recurring= $_POST["recurring"];
+		$recFreq= $_POST["recFreq"];
+		$endDate= $_POST["endDate"];
+
+		if($recurring==1 && (($recFreq!= "d" || $recFreq!= "w" || $recFreq!= "m") || ($endDate == NULL))) {
+			echo "Must fill out all fields to schedule a recurring appointment.";
 		}
-		// Create connection
-		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
-		// Check connection
-		if (!$conn) {
-			die("Connection failed: " . mysqli_connect_error());
-		}
-		$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
-			writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
-			size >= '$size' AND Building = '$Building'
-			AND C.roomID NOT IN (
-				SELECT roomID FROM Appt WHERE date='$date' AND (starttime >= '$starttime' AND 
-				endtime <= '$endtime')) ORDER BY AvgRating DESC";
-		$result=mysqli_query($conn, $sql);
-		if($result) {
-			echo "<form action='bookRoom.php' method='post'>";
-			while($row=mysqli_fetch_array($result)){
-				echo " <input type='radio' value='";
-				echo $row['roomID'];
-				echo "' name='room'/>";
-				echo $Building;
-				echo " ";
-				echo $row['roomID'];
-				echo " Average Rating: ";
-				echo $row['AvgRating'];
-				echo " <input type='hidden' name='start' value='";
-				echo $starttime;
-				echo "'/>";
-				echo " <input type='hidden' name='endtime' value='";
-				echo $endtime;
-				echo "'/> ";
-				echo " <input type='hidden' name='date' value='";
-				echo $date;
-				echo "'/> ";
-				echo "<br>";
-				}
-			echo "<input type='submit' value='book'>";
-			echo "</form>";
+		else {
+
+			$endtime=$starttime;
+			for($x=0; $x<$duration; $x++){
+				$endtime=date('H:i', strtotime($endtime)+1800);
+			}
+			// Create connection
+			$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
+			// Check connection
+			if (!$conn) {
+				die("Connection failed: " . mysqli_connect_error());
+			}
+			$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
+				writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
+				size >= '$size' AND Building = '$Building'
+				AND C.roomID NOT IN (
+					SELECT roomID FROM Appt WHERE date='$date' AND (starttime >= '$starttime' AND 
+					endtime <= '$endtime')) ORDER BY AvgRating DESC";
+			$result=mysqli_query($conn, $sql);
+			if($result) {
+				echo "<form action='bookRoom.php' method='post'>";
+				while($row=mysqli_fetch_array($result)){
+					echo " <input type='radio' value='";
+					echo $row['roomID'];
+					echo "' name='room'/>";
+					echo $Building;
+					echo " ";
+					echo $row['roomID'];
+					echo " Average Rating: ";
+					echo $row['AvgRating'];
+					echo " <input type='hidden' name='start' value='";
+					echo $starttime;
+					echo "'/>";
+					echo " <input type='hidden' name='endtime' value='";
+					echo $endtime;
+					echo "'/> ";
+					echo " <input type='hidden' name='date' value='";
+					echo $date;
+					echo "'/> ";
+					echo "<br>";
+					}
+				echo "<input type='submit' value='book'>";
+				echo "</form>";
 					
-		} else {
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			} else {
+				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			}
+			mysqli_close($conn);
+			}
 		}
-		mysqli_close($conn);
-		}
-		
 	?>
 
 
