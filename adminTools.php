@@ -1,16 +1,3 @@
-<?php
-    session_start();
-    echo '<p class = "role">Successful logged in as: ';
-    echo $_SESSION['row']['rank'];
-    echo '&nbsp';
-    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
-    echo '</p><br>';
-    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
-    echo $_SESSION['row']['firstname'];
-    echo " ";
-    echo $_SESSION['row']['lastname'];
-    echo '</header>';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,28 +24,41 @@ document.write(myMessage);
 </script>
 </h2>
 
+<?php
+    session_start();
+    echo '<p class = "role">Successful logged in as: ';
+    echo $_SESSION['row']['rank'];
+    echo '&nbsp';
+    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
+    echo '</p><br>';
+    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
+    echo $_SESSION['row']['firstname'];
+    echo " ";
+    echo $_SESSION['row']['lastname'];
+    echo '</header>';
+    ?>
+
+
 <aside class = "NavSiderbar">
 <nav>
-<<<<<<< HEAD
-
-    	<?php
-			if($_SESSION['row']['rank'] == "Admin"):
-				echo '<h3 class = "subtitle">Admin Tools</h3>';
-				echo '<ul>';
-					echo '<li><a href= "assignUserForm.php">Add New User</a></li><br>';
-					echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
-				echo '</ul>';
-			endif;
-			if($_SESSION['row']['rank'] == "Manager"):
-				echo '<h3 class = "subtitle">Manager Tools</h3>';
-				echo '<ul>';
-					echo '<li><a href= "assignUserForm.php">Add New User</a></li><br>';
-					echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
-				echo '</ul>';
-			endif;
-		?> 
-
-
+        <?php
+            if($_SESSION['row']['rank'] == "Admin"):
+                echo '<h3 class = "subtitle">Admin Tools</h3>';
+                echo '<ul>';
+                    echo '<li><a href= "assignUserForm.html">Add New User</a></li><br>';
+                    echo '<li><a href= "managerList.php">Manage Appointments</a></li><br>';
+                echo '</ul>';
+            else:
+                echo '<p>HI</p>';
+            endif;
+            if($_SESSION['row']['rank'] == "Manager"):
+                echo '<h3 class = "subtitle">Manager Tools</h3>';
+                echo '<ul>';
+                    echo '<li><a href= "assignUserForm.html">Add New User</a></li><br>';
+                    echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
+                echo '</ul>';
+            endif;
+        ?> 
 <h2 class = "subtitle">Contents</h2>
 <ul>
 <li><a href= "welcome.php">Overall</a></li><br>
@@ -77,13 +77,18 @@ document.write(myMessage);
 <?php
     $conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
     $user = $_SESSION['row']['id'];
+    $userID = $_GET['userID'];
+    
     if (!$conn) 
     {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    if($_SESSION['row']['rank'] == "Admin" || $_SESSION['row']['rank'] == "Manager")
+    if($_SESSION['row']['rank'] == "Admin")
+        $sql = "SELECT * FROM Appt a INNER JOIN users u ON a.user = u.id WHERE u.owner = '$userID' OR u.id = '$userID'";
+    else if ($_SESSION['row']['rank'] == "Manager") {
         $sql = "SELECT * FROM Appt a INNER JOIN users u ON a.user = u.id WHERE u.owner = '$user' OR u.id = '$user'";
+    }
     else 
         $sql = "SELECT * FROM Appt WHERE user = '$user'";
 
@@ -126,10 +131,11 @@ document.write(myMessage);
 function deleteRow(btn) {
   var row = btn.parentNode.parentNode;
   if(confirm('Are you sure you want to delete the appointment on ' + row.cells[3].innerHTML + 
-             ' starting at ' + row.cells[4].innerHTML + '?'))
+             ' starting at ' + row.cells[4].innerHTML + '? You will need to confirm via email, check your inbox.'))
     {
         row.parentNode.removeChild(row);
-        window.location.href = "updateApps.php?appID=" + row.cells[0].innerHTML;
+        window.location.href = "confirmationEmails.php?appID=" + row.cells[0].innerHTML + "&userID="
+        +row.cells[2].innerHTML;
     }
 }
 function editRow(btn)
