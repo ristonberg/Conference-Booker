@@ -8,9 +8,11 @@
 	$starttime = $_POST['starttime'];
 	$duration = $_POST['duration'];
 	$endtime=$starttime;
-		for($x=0; $x<$duration; $x++){
-			$endtime=date('H:i', strtotime($endtime)+1800);
-		}
+	for($x=0; $x<$duration; $x++){
+		$endtime=strtotime("+30 mins", strtotime($endtime));
+	}
+	$endtime=$starttime+$duration;
+	$starttime = strtotime($starttime);
 	$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 	
 	// Check connection
@@ -28,14 +30,14 @@
 	{
 		echo "That record already exists! Redirecting... ";
 		sleep (3); 
-		header("Location: http://176.32.230.252/xuezheng.com/adminTools.php");
+		header("Location: http://176.32.230.252/xuezheng.com/welcome.php");
 	}
 	else 
 	{
-		$sql = "UPDATE Appt SET date = '$date', starttime = '$starttime', endtime = '$endtime'
+		$sql = "UPDATE Appt SET date = '$date', starttime = ({$starttime}), endtime = ({$endtime})
 		WHERE appID = '$appID'";
 		$result=mysqli_query($conn, $sql);
-		header("Location: http://176.32.230.252/xuezheng.com/adminTools.php");
+		header("Location: http://176.32.230.252/xuezheng.com/welcome.php");
 
 	}
 

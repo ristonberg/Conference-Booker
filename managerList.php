@@ -72,61 +72,37 @@ document.write(myMessage);
 </nav>
 </aside>
 
-
 <?php
-date_default_timezone_set('America/Chicago');
-$first = "";
-$last = ""; 
-$appID = $_GET['appID'];
-$roomID = $_GET['roomID'];
-$user = $_GET['user'];
-$date = $_GET['date'];
-$starttime = $_GET['startime'];
-$endtime = $_GET['endtime'];
-$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
-        // Check connection
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-$sql = "SELECT firstname, lastname FROM users WHERE id = $user";
-$result=mysqli_query($conn, $sql);
-while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-    $first = $row['firstname'];
-    $last = $row['lastname'];   
-}
-$name = $first." ".$last; 
 
-echo "<form action='pushEdits.php' method='post' align = 'center'>";
-echo "<br/><br/><br/>";
-echo "<label for='$appID'>Appointment No. </label> &nbsp";
-echo "<br/><br/>";
-echo "<input value = '$appID' name = 'appID' readonly>";
-echo "<br/><br/><br/>";
-echo "<label for='$roomID'>Room No. </label> &nbsp";
-echo "<br/><br/>";
-echo "<input value = '$roomID' name = 'roomID' readonly>";
-echo "<br/><br/><br/>";
-echo "<label>User </label> &nbsp";
-echo "<br/><br/>";
-echo "<input value = '$name' readonly>";
-echo "<br/><br/><br/>";
-echo "<label for='$date'>Date </label> &nbsp";
-echo "<br/><br/>";
-echo "<input type='date' name='date' value = '$date'>";
-echo "<br/><br/><br/>";
-echo "<label for='$starttime'> Start Time </label> &nbsp";
-echo "<br/><br/>";
-echo "<input type='time' name = 'starttime' value = '$starttime'/>";
-echo "<br/><br/><br/>";
-echo "<label for='duration'>Duration of Meeting(minutes)</label>
-    <br/><br/>
-    <select id='duration' name='duration'>
-    <option value='1'>30</option>
-    <option value='2'>60</option>
-    <option value='3'>90</option>
-    <option value='4'>120</option>
-    </select><br/><br/>";
-echo "<input value = '$user' name = 'user' type='hidden' readonly>";
-echo "<input type='submit' value='Update Appointment'>";
-echo "</form>";
+$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
+$user = $_SESSION['row']['id'];
+$sql = "SELECT * FROM users WHERE owner = '$user' AND rank = 'Manager'"; 
+$result = mysqli_query($conn, $sql);
+
+echo "<table BORDER = 2>";
+echo "<th width='130'>User ID</th>";
+echo "<th width='130'>First Name</th>";
+echo "<th width='130'>Last Name</th>";
+echo "<th width='130'>Rank</th>";
+echo "<th width ='130'></th>";
+while($row = mysqli_fetch_array($result))
+        {
+            $id = $row['id'];
+            $firstname = $row['firstname'];
+            $lastname = $row['lastname'];
+            $rank = $row['rank'];
+            echo "<tr><td id='id'>".$id."</td><td>".$firstname."</td><td>".$lastname.
+            "</td><td>".$rank."</td><td><button type='button' class='btn' onClick='popRow(this, id)''>Manage Appointments</button>";   
+        }
+echo "</table>";
+
+
 ?>
+<script>
+function popRow(btn, user)
+{
+    var row = btn.parentNode.parentNode;
+    alert(user);
+    window.location.href = "adminTools.php?userID=" + row.cells[0].innerHTML;
+}
+</script>
