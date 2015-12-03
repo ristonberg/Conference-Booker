@@ -19,7 +19,7 @@
 
 <title>Conference Room Booker</title>
 
-<body>
+
 <script type="text/javascript" src="logOut.js"></script>
 <script type="text/javascript" src="background.js"></script>
 <link href="assignUserForm.css" rel="stylesheet">
@@ -94,12 +94,6 @@ function recursionCheck() {
 </nav>
 </aside>
 <main class="Content">
-<h3>Delete an Appointment</h2>
-
-
-<h4>You don't have any appointment right now.</h4>
-
-<br>
 
 
 
@@ -168,21 +162,22 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 <input type="checkbox" id="recurringBox" name="recurring" value="1">
 <br>
 
-<div id=recFreq>
-<label for="recFreq">Frequency of Reservation</label>
-<input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="d" id="daily"> Daily
-<input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="w" id="weekly"> Weekly
-<input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="m" id="monthly"> Monthly
+<div id=recFrequency>
+<label for="recFreq">Frequency of Reservation</label><br><br>
+<input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="d" id="daily"> Daily <br>
+<input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="w" id="weekly"> Weekly <br>
+<input type="radio" name="recFreq" onclick="javascript:recursionCheck();" value="m" id="monthly"> Monthly <br>
 </div>
 
+
 <div id=recDaily>
-<label for="endDate">Last Day of Reservation</label>
-<input type="date" name="endDate" id="endDate">
+<label for="endDay">Last Day of Reservation</label>
+<input type="date" name="endDay" id="endDay">
 </div>
 
 <div id=recWeekly>
-<label for="endDate">Number of Weeks</label>
-<select name="endDate" id="endDate">
+<label for="endWeek">Number of Weeks</label>
+<select name="endWeek" id="endWeek">
 <?php
 	for($i=1; $i<25; $i++) {
 		echo '<option value="$i">';
@@ -194,8 +189,8 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 </div>
 
 <div id=recMonthly>
-<label for="endDate">Last Month of Reservation</label>
-<select name="endDate" id="endDate">
+<label for="endMonth">Last Month of Reservation</label>
+<select name="endMonth" id="endMonth">
 <option value="January">January</option>
 <option value="February">February</option>
 <option value="March">March</option>
@@ -208,7 +203,7 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 <option value="October">October</option>
 <option value="November">November</option>
 <option value="December">December</option>
-
+</select>
 </div>
 
 <br><br>
@@ -224,7 +219,7 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 <option value="0">No</option>
 </select>
 <br><br>
-<label for="Writingboard">Chalkboard/whiteboard</label>
+<label for="Writingboard">Chalkboard/<br>whiteboard</label>
 <select id="Writingboard" name="Writingboard">
 <option value="1">Yes</option>
 <option value="0">No</option>
@@ -270,9 +265,11 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 		$size= $_POST["Size"];
 		$recurring= $_POST["recurring"];
 		$recFreq= $_POST["recFreq"];
-		$endDate= $_POST["endDate"];
+		$endDay= $_POST["endDay"];
+		$endWeek= $_POST["endWeek"];
+		$endMonth= $_POST["endMonth"];
 
-		if($recurring==1 && (($recFreq!= "d" || $recFreq!= "w" || $recFreq!= "m") || ($endDate == NULL))) {
+		if($recurring==1 && (($recFreq!= "d" && $recFreq!= "w" && $recFreq!= "m") || ($endDay == "" && $endWeek == "" && $endMonth == ""))) {
 			echo "Must fill out all fields to schedule a recurring appointment.";
 		}
 		else {
@@ -287,44 +284,106 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 			if (!$conn) {
 				die("Connection failed: " . mysqli_connect_error());
 			}
-			$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
+			if($recurring!=1) {
+				$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
 				writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
 				size >= '$size' AND Building = '$Building'
 				AND C.roomID NOT IN (
 					SELECT roomID FROM Appt WHERE date='$date' AND (starttime >= '$starttime' AND 
 					endtime <= '$endtime')) ORDER BY AvgRating DESC";
-			$result=mysqli_query($conn, $sql);
-			if($result) {
-				echo "<form action='bookRoom.php' method='post'>";
-				while($row=mysqli_fetch_array($result)){
-					echo " <input type='radio' value='";
-					echo $row['roomID'];
-					echo "' name='room'/>";
-					echo $Building;
-					echo " ";
-					echo $row['roomID'];
-					echo " Average Rating: ";
-					echo $row['AvgRating'];
-					echo " <input type='hidden' name='start' value='";
-					echo $starttime;
-					echo "'/>";
-					echo " <input type='hidden' name='endtime' value='";
-					echo $endtime;
-					echo "'/> ";
-					echo " <input type='hidden' name='date' value='";
-					echo $date;
-					echo "'/> ";
-					echo "<br>";
-					}
-				echo "<input type='submit' value='book'>";
-				echo "</form>";
-					
-			} else {
-				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				$result=mysqli_query($conn, $sql);
+				if($result) {
+					echo "<form action='bookRoom.php' method='post'>";
+					while($row=mysqli_fetch_array($result)){
+						echo " <input type='radio' value='";
+						echo $row['roomID'];
+						echo "' name='room'/>";
+						echo $Building;
+						echo " ";
+						echo $row['roomID'];
+						echo " Average Rating: ";
+						echo $row['AvgRating'];
+						echo " <input type='hidden' name='start' value='";
+						echo $starttime;
+						echo "'/>";
+						echo " <input type='hidden' name='endtime' value='";
+						echo $endtime;
+						echo "'/> ";
+						echo " <input type='hidden' name='date' value='";
+						echo $date;
+						echo "'/> ";
+						echo "<br>";
+						}
+					echo "<input type='submit' value='book'>";
+					echo "</form>";
+			
+				} else {
+					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
+				mysqli_close($conn);
 			}
-			mysqli_close($conn);
+			else if($recurring==1) {
+				if($recFreq=="d"){
+					$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
+					writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
+					size >= '$size' AND Building = '$Building'
+					AND C.roomID NOT IN (
+						SELECT roomID FROM Appt WHERE date>='$date' AND date<='$endDay' AND (starttime >= '$starttime' AND 
+						endtime <= '$endtime')) ORDER BY AvgRating DESC";
+					$result=mysqli_query($conn, $sql);
+					if($result) {
+						echo "<form action='bookRoom.php' method='post'>";
+						while($row=mysqli_fetch_array($result)){
+							echo " <input type='radio' value='";
+							echo $row['roomID'];
+							echo "' name='room'/>";
+							echo $Building;
+							echo " ";
+							echo $row['roomID'];
+							echo " Average Rating: ";
+							echo $row['AvgRating'];
+							echo " <input type='hidden' name='start' value='";
+							echo $starttime;
+							echo "'/>";
+							echo " <input type='hidden' name='endtime' value='";
+							echo $endtime;
+							echo "'/> ";
+							echo " <input type='hidden' name='date' value='";
+							echo $date;
+							echo "'/> ";
+							echo " <input type='hidden' name='recurring' value='";
+							echo $recurring;
+							echo "'/> ";
+							echo " <input type='hidden' name='recFreq' value='";
+							echo $recFreq;
+							echo "'/> ";
+							echo " <input type='hidden' name='endDay' value='";
+							echo $endDay;
+							echo "'/> ";
+							echo "<br>";
+						}
+						echo "<input type='submit' value='book'>";
+						echo "</form>";
+			
+					} else {
+						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+					}
+					
+					mysqli_close($conn);
+				
+				} else if($recFreq=="w") {
+				
+				
+				
+				} else if($recFreq=="m") {
+				
+				
+				
+				}
+				
 			}
 		}
+	}
 	?>
 
 

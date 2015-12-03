@@ -47,7 +47,10 @@ input,select {
 }
 
 
-
+input[type=radio] {
+  text-align: left;
+  width: 10px;
+}
 
 
 input[type=checkbox] {

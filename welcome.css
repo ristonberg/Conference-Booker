@@ -1,5 +1,4 @@
 
-
 body {
     /*text-align: center;*/
   font-size: medium;
@@ -45,12 +44,14 @@ aside.NavSiderbar{
 }
 
 /*recurring checkbox elements in searchroom.php */
-#recFreq {
+#recFrequency {
 	display:none;
 }
-#recurringBox:checked ~ #recFreq {
+#recurringBox:checked ~ #recFrequency {
 	display:block;
 }
+
+
 /*
 #recDaily {
 	display:none; 

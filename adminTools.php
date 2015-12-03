@@ -39,7 +39,6 @@ document.write(myMessage);
 
 <aside class = "NavSiderbar">
 <nav>
-<<<<<<< HEAD
 
     	<?php
 			if($_SESSION['row']['rank'] == "Admin"):

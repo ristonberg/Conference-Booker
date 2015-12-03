@@ -1,4 +1,3 @@
-
 <?php
     session_start();
     echo '<p class = "role">Successful logged in as: ';

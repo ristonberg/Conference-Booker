@@ -88,23 +88,60 @@ document.write(myMessage);
 		$starttime=$_POST["start"];
 		$endtime=$_POST["endtime"];
 		$date=$_POST["date"];
+		$recurring=$_POST["recurring"];
+		$recFreq= $_POST["recFreq"];
+		$endDay= $_POST["endDay"];
+		$endWeek= $_POST["endWeek"];
+		$endMonth= $_POST["endMonth"];
+		$roomID=$_POST['room'];
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 	
 		// Check connection
 		if (!$conn) {
 			die("Connection failed: " . mysqli_connect_error());
 		}
-	
-		$roomID=$_POST['room'];
-		$sql = "INSERT INTO Appt (roomID, user, date, starttime, endtime)
-		VALUES ('$roomID', '$user_id', '$date', '$starttime', '$endtime')";
-		
-		if (mysqli_query($conn, $sql)) {
+		if($recurring!=1){
+			$recurring=0;
+			$roomID=$_POST['room'];
+			$sql = "INSERT INTO Appt (roomID, user, date, starttime, endtime, recurring)
+			VALUES ('$roomID', '$user_id', '$date', '$starttime', '$endtime', '$recurring')";
+			
+			if (mysqli_query($conn, $sql)) {
 			echo "New record created successfully<br>";
 			echo "<script type='text/javascript'> goBack(); </script>";
-		} else {
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			} else {
+				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			}
+		} 
+		else if ($recurring==1 && $recFreq=="d"){
+			$sql = "INSERT INTO Rec_Appt (rec_start_time, rec_start_day, rec_day, user_id, room_id)
+			VALUES ('$starttime', '$date', '$endDay', '$user_id', '$roomID')";
+			
+			if (mysqli_query($conn, $sql)) {
+			echo "New record created successfully<br>";
+			} else {
+				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			}
+			
+			$sql = "SELECT rec_ID FROM Rec_Appt WHERE rec_start_time='$starttime' AND rec_start_day='$date'
+			AND rec_day='$endDay' AND user_id='$user_id' AND room_id='$roomID";
+			$result=mysqli_query($conn, $sql);
+			$rec_ID=$result;
+			$date1= date_create($date);
+			while ($date <= $endDay) {
+					$sql = "INSERT INTO Appt (roomID, user, date, starttime, endtime, recurring)
+					VALUES ('$roomID', '$user_id', '$date', '$starttime', '$endtime', '$recurring')";
+			
+					if (mysqli_query($conn, $sql)) {
+					echo "New record created successfully<br>";
+					} else {
+						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+					}
+				//date_add($date,date_interval_create_from_date_string("1 day"));
+				$date=date("Y-m-d",strtotime("+1 day", strtotime($date)));
+			}
 		}
+		
 	}
 ?>
 
