@@ -21,6 +21,6 @@ if($delete)
 }
 mysqli_close($conn);
 
-echo '<script>window.location = "http://localhost/Database/adminTools.php"</script>';
+echo '<script>window.location = "176.32.230.252/xuezheng.com/welcome.php"</script>';
 ?>
 
