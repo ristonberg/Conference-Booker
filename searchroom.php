@@ -318,6 +318,7 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 						echo "'/> ";
 						echo "<br>";
 						}
+					echo "<input type='hidden' name='waitlist' value='0' />";
 					echo "<input type='submit' value='Book Room Now'>";
 					echo "</form>";
 			
@@ -360,6 +361,7 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 						echo "'/> ";
 						echo "<br>";
 						}
+					echo "<input type='hidden' name='waitlist' value='1' />";
 					echo "<input type='submit' value='Join Waitlist'>";
 					echo "</form>";
 			
