@@ -104,16 +104,29 @@ document.write(myMessage);
 		if($recurring!=1){
 			$recurring=0;
 			$roomID=$_POST['room'];
-			$sql = "INSERT INTO Appt (roomID, building, user, date, starttime, endtime, recurring)
-			VALUES ('$roomID', '$building', '$user_id', '$date', '$starttime', '$endtime', '$recurring')";
-			
-			if (mysqli_query($conn, $sql)) {
-			echo "New record created successfully<br>";
-			echo "<script type='text/javascript'> goBack(); </script>";
-			} else {
-				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-			}
-		} 
+				if($waitlist!=1){
+					$sql = "INSERT INTO Appt (roomID, building, user, date, starttime, endtime, recurring)
+						VALUES ('$roomID', '$building', '$user_id', '$date', '$starttime', '$endtime', '$recurring')";
+				
+					if (mysqli_query($conn, $sql)) {
+					echo "New record created successfully<br>";
+					echo "<script type='text/javascript'> goBack(); </script>";
+					} else {
+						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+					}
+				}
+				else{
+					$sql = "INSERT INTO Waitlist (room, building, date, start, end, user_ID)
+						VALUES ('$roomID', '$building', '$date', '$starttime', '$endtime', '$user_id')";
+				
+					if (mysqli_query($conn, $sql)) {
+					echo "New record created successfully<br>";
+					echo "<script type='text/javascript'> goBack(); </script>";
+					} else {
+						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+					}
+				}
+		}
 		else if ($recurring==1 && $recFreq=="d"){
 			$sql = "INSERT INTO Rec_Appt (rec_start_time, rec_start_day, rec_day, user_id, room_id)
 			VALUES ('$starttime', '$date', '$endDay', '$user_id', '$roomID')";
