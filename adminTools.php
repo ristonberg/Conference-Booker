@@ -91,10 +91,10 @@ document.write(myMessage);
     }
     else if ($_SESSION['row']['rank'] == "Manager") 
     {
-        $sql = "SELECT * FROM Appt a INNER JOIN users u ON a.user = u.id WHERE u.owner = '$user' OR u.id = '$user'";
+        $sql = "SELECT * FROM Appt a INNER JOIN users u ON a.user = u.id WHERE u.owner = '$user' AND a.date >= '$today'";
     }
     else 
-        $sql = "SELECT * FROM Appt WHERE user = '$user'";
+        $sql = "SELECT * FROM Appt a WHERE a.user = '$user' AND a.date >= '$today'";
 
     $result = mysqli_query($conn, $sql);
     $result2 = "";
