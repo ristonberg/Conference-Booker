@@ -285,11 +285,11 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 			//if not recurring room
 			if($recurring!=1) {
 				$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
-				writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
-				size >= '$size' AND Building = '$Building'
-				AND C.roomID NOT IN (
-					SELECT roomID FROM Appt WHERE date='$date' AND (starttime >= '$starttime' AND 
-					endtime <= '$endtime')) ORDER BY AvgRating DESC";
+						writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
+						size >= '$size' AND Building = '$Building'
+						AND C.roomID NOT IN (
+							SELECT roomID FROM Appt WHERE date='$date' AND (starttime BETWEEN '$starttime' AND '$endtime' OR
+							endtime BETWEEN '$starttime' AND '$endtime')) ORDER BY AvgRating DESC";
 				$result=mysqli_query($conn, $sql);
 				if($result) {
 					echo "<form action='bookRoom.php' method='post'>";
@@ -316,7 +316,8 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 						echo "'/> ";
 						echo "<br>";
 						}
-					echo "<input type='submit' value='book'>";
+					echo "<input type='hidden' name='waitlist' value='0' />";
+					echo "<input type='submit' value='Book Room Now'>";
 					echo "</form>";
 			
 				} else {
@@ -329,8 +330,8 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 				$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
 						writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
 							size >= '$size' AND Building = '$Building'
-								AND C.roomID NOT IN (
-				SELECT roomID FROM Appt WHERE date='$date' AND (starttime BETWEEN '$starttime' AND '$endtime' OR
+								AND C.roomID IN (
+					SELECT roomID FROM Appt WHERE date='$date' AND (starttime BETWEEN '$starttime' AND '$endtime' OR
 					endtime BETWEEN '$starttime' AND '$endtime')) ORDER BY AvgRating DESC";
 				$result=mysqli_query($conn, $sql);
 				if($result) {
@@ -358,7 +359,8 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 						echo "'/> ";
 						echo "<br>";
 						}
-					echo "<input type='submit' value='book'>";
+					echo "<input type='hidden' name='waitlist' value='1' />";
+					echo "<input type='submit' value='Join Waitlist'>";
 					echo "</form>";
 			
 				} else {
