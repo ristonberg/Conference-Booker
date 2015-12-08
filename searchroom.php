@@ -332,7 +332,8 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 					SELECT roomID FROM Appt WHERE date='$date' AND (starttime >= '$starttime' AND 
 					endtime <= '$endtime')) ORDER BY AvgRating DESC";
 				$result=mysqli_query($conn, $sql);
-				echo "<form action='bookHeldRoom.php' method='post'>";
+				if($result) {
+				echo "<form action='bookRoom.php' method='post'>";
 					while($row=mysqli_fetch_array($result)){
 						echo " <input type='radio' value='";
 						echo $row['roomID'];
