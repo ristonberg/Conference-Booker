@@ -65,6 +65,10 @@ document.write(myMessage);
 <li><a href= "welcome.php">Home</a></li><br>
 <li><a href= "myprofile.php">My Profile</a></li><br>
 <li><a href= "searchroom.php">Book a Room</a></li><br>
+<<<<<<< HEAD
+=======
+<li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
+>>>>>>> 3b84e894ee9e8b4af08177cf80bb0f9aa3cf3281
 <li><a href= "feedbackHis.php">Feedback History</a></li><br>
 <li><a href= "apptHis.php">Appointment History</a></li><br>
 </ul>
