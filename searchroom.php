@@ -83,7 +83,7 @@ function recursionCheck() {
 		?> 
 <h2 class = "subtitle">Contents</h2>
 <ul>
-<li><a href= "welcome.php">Overall</a></li><br>
+<li><a href= "welcome.php">Home</a></li><br>
 <li><a href= "myprofile.php">My Profile</a></li><br>
 <li><a href= "searchroom.php">Book a Room</a></li><br>
 <li><a href= "feedbackHis.php">Feedback History</a></li><br>
@@ -436,18 +436,18 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 	}
 	?>
 
-
-<footer class="Disclaimer">
-<p >These information do not reflect the views of our site.</p>
-
-<p>
-<a href="AboutUs.html">About Us</a>
-<a href="Disclaimer.html">Disclaimer</a>
-<a href="ContactUs.html">Contact Us</a>
-</p>
-
-<p>Copyright © 2015</p>
-</footer>
+    
+    <footer class="Disclaimer">
+        <p >These information do not reflect the views of our site.</p>
+       
+        <p>
+        <a href="AboutUs.html">About Us</a>
+         <a href="Disclaimer.html">Disclaimer</a>
+         <a href="ContactUs.html">Contact Us</a>
+         </p>
+        
+        <p>Copyright © 2015</p>
+    </footer>
 
 
 </main>

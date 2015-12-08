@@ -116,7 +116,7 @@ document.write(myMessage);
 		?> 
 <h2 class = "subtitle">Contents</h2>
 <ul>
-	<li><a href= "welcome.php">Overall</a></li><br>
+	<li><a href= "welcome.php">Home</a></li><br>
 	<li><a href= "myprofile.php">My Profile</a></li><br>
 	<li><a href= "searchroom.php">Book a Room</a></li><br>
 	<li><a href= "feedbackHis.php">Feedback History</a></li><br>
