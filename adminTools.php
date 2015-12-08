@@ -1,16 +1,3 @@
-<?php
-    session_start();
-    echo '<p class = "role">Successful logged in as: ';
-    echo $_SESSION['row']['rank'];
-    echo '&nbsp';
-    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
-    echo '</p><br>';
-    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
-    echo $_SESSION['row']['firstname'];
-    echo " ";
-    echo $_SESSION['row']['lastname'];
-    echo '</header>';
-    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +23,21 @@ var myMessage= Greetings();
 document.write(myMessage);
 </script>
 </h2>
+
+<?php
+    session_start();
+    echo '<p class = "role">Successful logged in as: ';
+    echo $_SESSION['row']['rank'];
+    echo '&nbsp';
+    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
+    echo '</p><br>';
+    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
+    echo $_SESSION['row']['firstname'];
+    echo " ";
+    echo $_SESSION['row']['lastname'];
+    echo '</header>';
+    ?>
+
 
 <aside class = "NavSiderbar">
 <nav>
@@ -75,26 +77,65 @@ document.write(myMessage);
     $conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
     $user = $_SESSION['row']['id'];
     $userID = $_GET['userID'];
-    
+    $today = date('Y/m/d');
+
     if (!$conn) 
     {
         die("Connection failed: " . mysqli_connect_error());
     }
 
     if($_SESSION['row']['rank'] == "Admin")
-        $sql = "SELECT * FROM Appt a INNER JOIN users u ON a.user = u.id WHERE u.owner = '$userID' OR u.id = '$userID'";
-    else if ($_SESSION['row']['rank'] == "Manager") {
+    {
+        $sql = "SELECT * FROM Appt a INNER JOIN users u ON a.user = u.id WHERE u.owner = '$userID' AND a.date >= '$today'"; 
+        $sql2 = "SELECT * FROM Appt a WHERE user = '$userID' AND a.date >= '$today'";
+    }
+    else if ($_SESSION['row']['rank'] == "Manager") 
+    {
         $sql = "SELECT * FROM Appt a INNER JOIN users u ON a.user = u.id WHERE u.owner = '$user' OR u.id = '$user'";
     }
     else 
         $sql = "SELECT * FROM Appt WHERE user = '$user'";
 
     $result = mysqli_query($conn, $sql);
+    $result2 = "";
+    if($_SESSION['row']['rank'] == "Admin")
+    {
+        $result2 = mysqli_query($conn, $sql2);
+    }
+    if($result2)
+    {
+        echo "Manager's Appointments";
+        echo "<form id ='appTable' action = 'updateApps.php' method='post'>";
+        echo "<table BORDER = '2'>";
+        echo "<th width='130'>Appointment #</th>";
+        echo "<th width='130'>Room</th>";
+        echo "<th width='130'>User</th>";
+        echo "<th width='130'>Date</th>";
+        echo "<th width='130'>Start Time</th>";
+        echo "<th width='130'>End Time</th>";
+        while($row = mysqli_fetch_array($result2))
+        {
+            $appID = $row['appID'];
+            $roomID= $row['roomID'];
+            $user = $row['user'];
+            $date = $row['date'];
+            $starttime = $row['starttime'];
+            $endtime = $row['endtime']; 
+            echo "<tr><td id='appID'>".$appID."</td><td>".$roomID."</td><td>".$user.
+            "</td><td input type='date'>".$date."</td><td>".$starttime.
+            "</td><td>".$endtime."</td><td><button type='button' class='btn' onClick='editRow(this)''>Edit</button></td>
+            <td><button type='button' class='btn' onClick='deleteRow(this)''>Delete</button></td></tr>";   
+        }
+        echo "</table>";
+        echo "</form>";  
+        echo "<br>";
+        echo "Managed User's Appointments";
+    }
 
     if($result)
     {
  
-        echo "<form id ='appTable' action = 'updateApps.php' method='post'>";
+        echo "<form id ='appTable2' action = 'updateApps.php' method='post'>";
         echo "<table BORDER = '2'>";
         echo "<th width='130'>Appointment #</th>";
         echo "<th width='130'>Room</th>";
