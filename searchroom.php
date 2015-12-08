@@ -331,7 +331,7 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 				$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
 						writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
 							size >= '$size' AND Building = '$Building'
-								AND C.roomID NOT IN (
+								AND C.roomID IN (
 					SELECT roomID FROM Appt WHERE date='$date' AND (starttime BETWEEN '$starttime' AND '$endtime' OR
 					endtime BETWEEN '$starttime' AND '$endtime')) ORDER BY AvgRating DESC";
 				$result=mysqli_query($conn, $sql);
