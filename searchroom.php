@@ -86,7 +86,6 @@ function recursionCheck() {
 <li><a href= "welcome.php">Overall</a></li><br>
 <li><a href= "myprofile.php">My Profile</a></li><br>
 <li><a href= "searchroom.php">Book/Cancel a Room</a></li><br>
-<li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
 <li><a href= "feedbackHis.php">Feedback History</a></li><br>
 <li><a href= "apptHis.php">Appointment History</a></li><br>
 
@@ -306,6 +305,9 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 						echo " <input type='hidden' name='start' value='";
 						echo $starttime;
 						echo "'/>";
+						echo " <input type='hidden' name='building' value='";
+						echo $Building;
+						echo "'/>";
 						echo " <input type='hidden' name='endtime' value='";
 						echo $endtime;
 						echo "'/> ";
@@ -320,6 +322,47 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 				} else {
 					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 				}
+				echo "<hr>";
+				echo "Booked Rooms";
+				echo "Select a room to be placed on a waitlist for";
+				$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
+				writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
+				size >= '$size' AND Building = '$Building'
+				AND C.roomID IN (
+					SELECT roomID FROM Appt WHERE date='$date' AND (starttime >= '$starttime' AND 
+					endtime <= '$endtime')) ORDER BY AvgRating DESC";
+				$result=mysqli_query($conn, $sql);
+				echo "<form action='bookHeldRoom.php' method='post'>";
+					while($row=mysqli_fetch_array($result)){
+						echo " <input type='radio' value='";
+						echo $row['roomID'];
+						echo "' name='room'/>";
+						echo $Building;
+						echo " ";
+						echo $row['roomID'];
+						echo " Average Rating: ";
+						echo $row['AvgRating'];
+						echo " <input type='hidden' name='start' value='";
+						echo $starttime;
+						echo "'/>";
+						echo " <input type='hidden' name='building' value='";
+						echo $Building;
+						echo "'/>";
+						echo " <input type='hidden' name='endtime' value='";
+						echo $endtime;
+						echo "'/> ";
+						echo " <input type='hidden' name='date' value='";
+						echo $date;
+						echo "'/> ";
+						echo "<br>";
+						}
+					echo "<input type='submit' value='book'>";
+					echo "</form>";
+			
+				} else {
+					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				}
+				
 				mysqli_close($conn);
 			}
 			else if($recurring==1) {

@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,8 +40,7 @@ document.write(myMessage);
 </script>
 </h2>
 	<?php
-        // Start the session
-        session_start();
+        
 
         // if user has already logged in
         // skip connecting database
@@ -130,7 +132,6 @@ document.write(myMessage);
         	<li><a href= "welcome.php">Overall</a></li><br>
             <li><a href= "myprofile.php">My Profile</a></li><br>
             <li><a href= "searchroom.php">Book/Cancel a Room</a></li><br>
-            <li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
             <li><a href= "feedbackHis.php">Feedback History</a></li><br>
             <li><a href= "apptHis.php">Appointment History</a></li><br>
             

@@ -94,6 +94,8 @@ document.write(myMessage);
 		$endWeek= $_POST["endWeek"];
 		$endMonth= $_POST["endMonth"];
 		$roomID=$_POST['room'];
+		$building=$_POST['building'];
+		
 		$conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
 	
 		// Check connection
@@ -103,8 +105,8 @@ document.write(myMessage);
 		if($recurring!=1){
 			$recurring=0;
 			$roomID=$_POST['room'];
-			$sql = "INSERT INTO Appt (roomID, user, date, starttime, endtime, recurring)
-			VALUES ('$roomID', '$user_id', '$date', '$starttime', '$endtime', '$recurring')";
+			$sql = "INSERT INTO Appt (roomID, building, user, date, starttime, endtime, recurring)
+			VALUES ('$roomID', '$building', '$user_id', '$date', '$starttime', '$endtime', '$recurring')";
 			
 			if (mysqli_query($conn, $sql)) {
 			echo "New record created successfully<br>";
@@ -129,8 +131,8 @@ document.write(myMessage);
 			$rec_ID=$result;
 			$date1= date_create($date);
 			while ($date <= $endDay) {
-					$sql = "INSERT INTO Appt (roomID, user, date, starttime, endtime, recurring)
-					VALUES ('$roomID', '$user_id', '$date', '$starttime', '$endtime', '$recurring')";
+					$sql = "INSERT INTO Appt (roomID, building, user, date, starttime, endtime, recurring)
+					VALUES ('$roomID', '$building', '$user_id', '$date', '$starttime', '$endtime', '$recurring')";
 			
 					if (mysqli_query($conn, $sql)) {
 					echo "New record created successfully<br>";
