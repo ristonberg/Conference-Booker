@@ -331,8 +331,7 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 				}
 				echo "<hr>";
 				//waitlist queries/display
-				echo "Booked Rooms";
-				echo "Select a room to be placed on a waitlist for";
+				echo "<h5>Booked Rooms</h5><br><h6>Select a room to be placed on a waitlist</h6><br>";
 				$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
 						writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
 							size >= '$size' AND Building = '$Building'
