@@ -302,6 +302,12 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 						echo $row['roomID'];
 						echo " Average Rating: ";
 						echo $row['AvgRating'];
+						echo " ";
+						echo "<a href='commentHis.php?roomID=";
+						echo $row['roomID'];
+						echo "&Building=";
+						echo $Building;
+						echo "' target='_blank' >Comments</a>";
 						echo " <input type='hidden' name='start' value='";
 						echo $starttime;
 						echo "'/>";
@@ -345,6 +351,12 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 						echo $row['roomID'];
 						echo " Average Rating: ";
 						echo $row['AvgRating'];
+						echo " ";
+						echo "<a href='commentHis.php?roomID=";
+						echo $row['roomID'];
+						echo "&Building=";
+						echo $Building;
+						echo "' target='_blank' >Comments</a>";
 						echo " <input type='hidden' name='start' value='";
 						echo $starttime;
 						echo "'/>";
@@ -393,6 +405,12 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 							echo $row['roomID'];
 							echo " Average Rating: ";
 							echo $row['AvgRating'];
+							echo " ";
+							echo "<a href='commentHis.php?roomID=";
+							echo $row['roomID'];
+							echo "&Building=";
+							echo $Building;
+							echo "' target='_blank' >Comments</a>";
 							echo " <input type='hidden' name='start' value='";
 							echo $starttime;
 							echo "'/>";
