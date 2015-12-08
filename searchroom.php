@@ -85,7 +85,7 @@ function recursionCheck() {
 <ul>
 <li><a href= "welcome.php">Overall</a></li><br>
 <li><a href= "myprofile.php">My Profile</a></li><br>
-<li><a href= "searchroom.php">Book/Cancel a Room</a></li><br>
+<li><a href= "searchroom.php">Book a Room</a></li><br>
 <li><a href= "feedbackHis.php">Feedback History</a></li><br>
 <li><a href= "apptHis.php">Appointment History</a></li><br>
 
@@ -283,6 +283,7 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 			if (!$conn) {
 				die("Connection failed: " . mysqli_connect_error());
 			}
+			//if not recurring room
 			if($recurring!=1) {
 				$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
 				writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
@@ -323,6 +324,7 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 					echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 				}
 				echo "<hr>";
+				//waitlist queries/display
 				echo "Booked Rooms";
 				echo "Select a room to be placed on a waitlist for";
 				$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
@@ -366,6 +368,10 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 				
 				mysqli_close($conn);
 			}
+			
+			
+			
+			//if recurring reservation
 			else if($recurring==1) {
 				if($recFreq=="d"){
 					$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
