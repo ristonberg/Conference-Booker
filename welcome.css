@@ -28,7 +28,9 @@ body {
     padding-top: 20px;
 }
 
-
+.reportButton {
+	text-align: center;
+}
 
 aside.NavSiderbar{
     padding-left: 2px;

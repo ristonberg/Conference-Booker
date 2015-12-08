@@ -37,7 +37,19 @@ document.write(myMessage);
 </script>
 </h2>
 
-
+<?php
+	if($_SESSION['row']['rank'] == "Admin"):
+		echo "<div class= 'reportButton'>";
+			echo "<button class='button' onClick='sendReport();'>Generate Reservation History Report</button>";
+		echo "</div>";
+	endif;
+	if($_SESSION['row']['rank'] == "Manager"):
+		echo "<div class= 'reportButton'>";
+			echo "<button class='button' onClick='sendReport();'>Generate Reservation History Report</button>";
+		echo "</div>";
+	endif;
+?>
+	
 <aside class = "NavSiderbar">
 <nav>
         <?php
@@ -45,16 +57,12 @@ document.write(myMessage);
                 echo '<h3 class = "subtitle">Admin Tools</h3>';
                 echo '<ul>';
                     echo '<li><a href= "assignUserForm.php">Add New User</a></li><br>';
-                    echo '<li><a href= "managerList.php">Manage Appointments</a></li><br>';
                 echo '</ul>';
-            else:
-                echo '<p>HI</p>';
             endif;
             if($_SESSION['row']['rank'] == "Manager"):
                 echo '<h3 class = "subtitle">Manager Tools</h3>';
                 echo '<ul>';
                     echo '<li><a href= "assignUserForm.php">Add New User</a></li><br>';
-                    echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
                 echo '</ul>';
             endif;
         ?> 
@@ -166,6 +174,10 @@ document.write(myMessage);
 ?>
 
 <script>
+
+function sendReport() {
+	window.location="report.php";
+}
 
 function deleteRow(btn) {
   var row = btn.parentNode.parentNode;

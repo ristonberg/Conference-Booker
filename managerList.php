@@ -46,7 +46,6 @@ document.write(myMessage);
                 echo '<h3 class = "subtitle">Admin Tools</h3>';
                 echo '<ul>';
                     echo '<li><a href= "assignUserForm.html">Add New User</a></li><br>';
-                    echo '<li><a href= "managerList.php">Manage Appointments</a></li><br>';
                 echo '</ul>';
             else:
                 echo '<p>HI</p>';
@@ -55,7 +54,6 @@ document.write(myMessage);
                 echo '<h3 class = "subtitle">Manager Tools</h3>';
                 echo '<ul>';
                     echo '<li><a href= "assignUserForm.html">Add New User</a></li><br>';
-                    echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
                 echo '</ul>';
             endif;
         ?> 

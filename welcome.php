@@ -113,14 +113,12 @@ document.write(myMessage);
 				echo '<h3 class = "subtitle">Admin Tools</h3>';
 				echo '<ul>';
 					echo '<li><a href= "assignUserForm.php">Add New User</a></li><br>';
-					echo '<li><a href= "managerList.php">Manage Appointments</a></li><br>';
 				echo '</ul>';
 			endif;
 			if($_SESSION['row']['rank'] == "Manager"):
 				echo '<h3 class = "subtitle">Manager Tools</h3>';
 				echo '<ul>';
 					echo '<li><a href= "assignUserForm.php">Add New User</a></li><br>';
-					echo '<li><a href= "adminTools.php">Manage Appointments</a></li><br>';
 				echo '</ul>';
 			endif;
 		?> 
