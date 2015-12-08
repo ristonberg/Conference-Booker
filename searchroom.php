@@ -287,11 +287,11 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 			//if not recurring room
 			if($recurring!=1) {
 				$sql = "SELECT roomID, AvgRating FROM Conf_rooms C WHERE internet >= '$internet' AND mic >= '$mic' AND 
-				writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
-				size >= '$size' AND Building = '$Building'
-				AND C.roomID NOT IN (
-					SELECT roomID FROM Appt WHERE date='$date' AND (starttime >= '$starttime' AND 
-					endtime <= '$endtime')) ORDER BY AvgRating DESC";
+						writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
+						size >= '$size' AND Building = '$Building'
+						AND C.roomID NOT IN (
+							SELECT roomID FROM Appt WHERE date='$date' AND (starttime BETWEEN '$starttime' AND '$endtime' OR
+							endtime BETWEEN '$starttime' AND '$endtime')) ORDER BY AvgRating DESC";
 				$result=mysqli_query($conn, $sql);
 				if($result) {
 					echo "<form action='bookRoom.php' method='post'>";
@@ -332,7 +332,7 @@ element.innerHTML = '<label for="date">Date</label> <input type="date" min = ' +
 						writingboard >= '$writingboard' AND screen >= '$screen' AND computer >= '$computer' AND
 							size >= '$size' AND Building = '$Building'
 								AND C.roomID NOT IN (
-				SELECT roomID FROM Appt WHERE date='$date' AND (starttime BETWEEN '$starttime' AND '$endtime' OR
+					SELECT roomID FROM Appt WHERE date='$date' AND (starttime BETWEEN '$starttime' AND '$endtime' OR
 					endtime BETWEEN '$starttime' AND '$endtime')) ORDER BY AvgRating DESC";
 				$result=mysqli_query($conn, $sql);
 				if($result) {
