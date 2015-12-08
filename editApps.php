@@ -1,3 +1,17 @@
+<?php
+    session_start();
+    echo '<p class = "role">Successful logged in as: ';
+    echo $_SESSION['row']['rank'];
+    echo '&nbsp';
+    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
+    echo '</p><br>';
+    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
+    echo $_SESSION['row']['firstname'];
+    echo " ";
+    echo $_SESSION['row']['lastname'];
+    echo '</header>';
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,20 +38,6 @@ document.write(myMessage);
 </script>
 </h2>
 
-<?php
-    session_start();
-    echo '<p class = "role">Successful logged in as: ';
-    echo $_SESSION['row']['rank'];
-    echo '&nbsp';
-    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
-    echo '</p><br>';
-    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
-    echo $_SESSION['row']['firstname'];
-    echo " ";
-    echo $_SESSION['row']['lastname'];
-    echo '</header>';
-    ?>
-
 
 <aside class = "NavSiderbar">
 <nav>
@@ -48,8 +48,6 @@ document.write(myMessage);
                     echo '<li><a href= "assignUserForm.html">Add New User</a></li><br>';
                     echo '<li><a href= "managerList.php">Manage Appointments</a></li><br>';
                 echo '</ul>';
-            else:
-                echo '<p>HI</p>';
             endif;
             if($_SESSION['row']['rank'] == "Manager"):
                 echo '<h3 class = "subtitle">Manager Tools</h3>';
@@ -64,10 +62,7 @@ document.write(myMessage);
 <li><a href= "welcome.php">Home</a></li><br>
 <li><a href= "myprofile.php">My Profile</a></li><br>
 <li><a href= "searchroom.php">Book a Room</a></li><br>
-<<<<<<< HEAD
-=======
-<li><a href= "provideFeedback.php">Provide a Feedback</a></li><br>
->>>>>>> 3b84e894ee9e8b4af08177cf80bb0f9aa3cf3281
+<li><a href= "adminTools.php">Manage Appointments</a></li><br>
 <li><a href= "feedbackHis.php">Feedback History</a></li><br>
 <li><a href= "apptHis.php">Appointment History</a></li><br>
 

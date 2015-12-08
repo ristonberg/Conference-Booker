@@ -1,3 +1,16 @@
+<?php
+    session_start();
+    echo '<p class = "role">Successful logged in as: ';
+    echo $_SESSION['row']['rank'];
+    echo '&nbsp';
+    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
+    echo '</p><br>';
+    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
+    echo $_SESSION['row']['firstname'];
+    echo " ";
+    echo $_SESSION['row']['lastname'];
+    echo '</header>';
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,20 +36,6 @@ var myMessage= Greetings();
 document.write(myMessage);
 </script>
 </h2>
-
-<?php
-    session_start();
-    echo '<p class = "role">Successful logged in as: ';
-    echo $_SESSION['row']['rank'];
-    echo '&nbsp';
-    echo '<input id="button1" type="button" onclick="logOut();" value="LOGOUT"/>';
-    echo '</p><br>';
-    echo '<header class = "Disclaimer"><h1>Welcome</h1>';
-    echo $_SESSION['row']['firstname'];
-    echo " ";
-    echo $_SESSION['row']['lastname'];
-    echo '</header>';
-    ?>
 
 
 <aside class = "NavSiderbar">
@@ -64,6 +63,7 @@ document.write(myMessage);
 <li><a href= "welcome.php">Overall</a></li><br>
 <li><a href= "myprofile.php">My Profile</a></li><br>
 <li><a href= "searchroom.php">Book a Room</a></li><br>
+<li><a href= "adminTools.php">Manage Appointments</a></li><br>
 <li><a href= "feedbackHis.php">Feedback History</a></li><br>
 <li><a href= "apptHis.php">Appointment History</a></li><br>
 
@@ -74,6 +74,7 @@ document.write(myMessage);
 
 
 <?php
+	date_default_timezone_set('America/Chicago');
     $conn = mysqli_connect("176.32.230.252","cl57-xuezheng","HnsXB/zKk","cl57-xuezheng");
     $user = $_SESSION['row']['id'];
     $userID = $_GET['userID'];
